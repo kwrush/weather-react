@@ -51,9 +51,9 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            styles: path.resolve(__dirname, 'src/styles/'),
-            scripts: path.resolve(__dirname, 'src/scripts/'),
-            assets: path.resolve(__dirname, 'src/assets/')
+            Styles: path.resolve(__dirname, 'src/styles/'),
+            Scripts: path.resolve(__dirname, 'src/scripts/'),
+            Assets: path.resolve(__dirname, 'src/assets/')
         }
     },
     devtool: 'source-map',
