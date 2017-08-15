@@ -11,82 +11,46 @@ const checkResponseStatus = (response) => {
     return response;
 }
 
-const requestTimeout = (resolve, reject) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(reject, 5000, new Error('Request time out!'));
-    });
-};
-
-const requestData = (url = '/api/darksky', config = {}) => {
-    return fetch(url, config)
-        .then(checkResponseStatus)
-        .catch(error => {
-            throw error;
-        })
-        .then(response => response.json())
-        .catch(error => {
-            const response = error.response;
-            if (typeof response === 'undefined') {
+const callApi = async (url = '/api/darksky', config = {}, onRequestSuccess, onRequestFailure) => {
+    try {
+        const json = await fetch(url, config)
+            .then(checkResponseStatus)
+            .catch(error => {
                 throw error;
-            } else {
-                error.status = response.status;
-                error.statusText = response.statusText;
-                response
-                    .text()
-                    .then(text => {
-                        try {
-                            const json = JSON.parse(text);
-                            error.message = json.message;
-                        } catch (exp) {
-                            error.message = text;
-                        }
+            })
+            .then(response => response.json());
 
-                        throw error;
-                    });
+        onRequestSuccess(json);
+
+    } catch (error) {
+        const response = error.response;
+        if (typeof response === 'undefined') {
+            onRequestFailure(error);
+        } else {
+            error.status = response.status;
+            error.statusText = response.statusText;
+
+            const text = await response.text();
+            try {
+                const json = JSON.parse(text);
+                error.message = json.message;
+            } catch (exp) {
+                error.message = text;
             }
-        });
+
+            onRequestFailure(error);
+        }
+    } 
 };
 
-const callApi = (url = '/api/darksky', config = {}, onRequestSuccess, onRequestFailure) => {
-    return new Promise()
-        .race([requestTimeout, requestData])
-        .then(json => onRequestSuccess(json))
-        .catch(error => onRequestFailure(error));
-};
-
-export const getWeather = (geoInfo = {}) => {
+export const getWeather = (geoInfo = {}, onSuccess, onFailure) => {
     const {latitude, longitude} = geoInfo;
     const url = `/api/darksky?latitude=${latitude}&longtitude=${longitude}&exclude=minutely,alerts,flags`;
 
-    return callApi(
-        url, null, 
-        (response) => {
-
-        }, 
-        (error) => {
-            console.error(error.message);
-            return error;
-        }
-    );
+    return callApi(url, null, onSuccess, onFailure);
 }
 
-export const getGeoLocation = (address = '') => {
+export const getGeoLocation = (address = '', onSuccess, onFailure) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?language=en&address=${address}`;
-
-    return fetch(url, config)
-        .then(response => {
-            if (!response.ok) {
-                const error = new Error(response.statusText || response.status);
-                error.response = response;
-                throw error;
-            }
-
-            return response;
-        })
-        .then(response => response.json())
-        .then(json => {
-            return json.results.length > 0 ? 
-                createLocationData(json) :
-                null;
-        });
+    return callApi(url, null, onSuccess, onFailure);
 }
