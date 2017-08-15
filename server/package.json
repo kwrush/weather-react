@@ -1,0 +1,22 @@
+{
+  "name": "server-api",
+  "version": "0.0.0",
+  "description": "This is API server for fetching data",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server.js"
+  },
+  "keywords": [
+    "server",
+    "node",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "es6-promise": "^4.1.1",
+    "express": "^4.15.4",
+    "isomorphic-fetch": "^2.2.1"
+  }
+}
