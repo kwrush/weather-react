@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "fecha": "^2.3.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.6.1",
@@ -11,7 +12,9 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "fetch-mock": "^5.12.2"
+  },
   "scripts": {
     "start": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",

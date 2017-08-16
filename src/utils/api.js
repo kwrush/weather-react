@@ -1,4 +1,6 @@
-import fetch from 'isomorphic-fetch';
+// sepcify "as" or "from" causes "only absolute urls are supported"
+// error in the test with fetch-mock
+import 'isomorphic-fetch'; 
 
 // Based on https://github.com/cloudmu/darksky/blob/master/src/apiUtils.js
 const checkResponseStatus = (response) => {
@@ -11,7 +13,7 @@ const checkResponseStatus = (response) => {
     return response;
 }
 
-const callApi = async (url = '/api/darksky', config = {}, onRequestSuccess, onRequestFailure) => {
+const callApi = async (url, config, onRequestSuccess, onRequestFailure) => {
     try {
         const json = await fetch(url, config)
             .then(checkResponseStatus)
@@ -43,14 +45,13 @@ const callApi = async (url = '/api/darksky', config = {}, onRequestSuccess, onRe
     } 
 };
 
-export const getWeather = (geoInfo = {}, onSuccess, onFailure) => {
+export const getWeather = (geoInfo = {}, onSuccess = () => {}, onFailure = () => {}) => {
     const {latitude, longitude} = geoInfo;
     const url = `/api/darksky?latitude=${latitude}&longtitude=${longitude}&exclude=minutely,alerts,flags`;
-
-    return callApi(url, null, onSuccess, onFailure);
+    callApi(url, null, onSuccess, onFailure);
 }
 
-export const getGeoLocation = (address = '', onSuccess, onFailure) => {
+export const getGeoLocation = (address = '', onSuccess = () => {}, onFailure = () => {}) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?language=en&address=${address}`;
-    return callApi(url, null, onSuccess, onFailure);
+    callApi(url, null, onSuccess, onFailure);
 }
