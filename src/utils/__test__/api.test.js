@@ -38,7 +38,7 @@ describe('fetch weather and geo location', () => {
     });
 
     it('should fetch weather data from api', done => {
-        fetchMock.mock(`/api/darksky?latitude=${geo.latitude}&longtitude=${geo.longitude}&exclude=minutely,alerts,flags`, fakeWeather);
+        fetchMock.mock(`/api/darksky?latitude=${geo.latitude}&longitude=${geo.longitude}&exclude=minutely,alerts,flags`, fakeWeather);
         getWeather(geo, data => {
             expect(data.name).toBe('Amsterdam')
             expect(data.weather).toMatchObject({

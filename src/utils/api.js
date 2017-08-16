@@ -13,21 +13,21 @@ const checkResponseStatus = (response) => {
     return response;
 }
 
-const callApi = async (url, config, onRequestSuccess, onRequestFailure) => {
+const callApi = async (url, config, onSuccess, onFailure) => {
     try {
-        const json = await fetch(url, config)
+        const response = await fetch(url, config)
             .then(checkResponseStatus)
             .catch(error => {
                 throw error;
-            })
-            .then(response => response.json());
+            });
 
-        onRequestSuccess(json);
+        const json = await response.json();  
+        onSuccess(json);
 
     } catch (error) {
         const response = error.response;
         if (typeof response === 'undefined') {
-            onRequestFailure(error);
+            onFailure(error);
         } else {
             error.status = response.status;
             error.statusText = response.statusText;
@@ -40,18 +40,18 @@ const callApi = async (url, config, onRequestSuccess, onRequestFailure) => {
                 error.message = text;
             }
 
-            onRequestFailure(error);
+            onFailure(error);
         }
     } 
 };
 
-export const getWeather = (geoInfo = {}, onSuccess = () => {}, onFailure = () => {}) => {
+export const getWeather = (geoInfo = {}, onRequestSuccess = () => {}, onRequestFailure = () => {}) => {
     const {latitude, longitude} = geoInfo;
-    const url = `/api/darksky?latitude=${latitude}&longtitude=${longitude}&exclude=minutely,alerts,flags`;
-    callApi(url, null, onSuccess, onFailure);
+    const url = `/api/darksky?latitude=${latitude}&longitude=${longitude}&exclude=minutely,alerts,flags`;
+    callApi(url, null, onRequestSuccess, onRequestFailure);
 }
 
-export const getGeoLocation = (address = '', onSuccess = () => {}, onFailure = () => {}) => {
+export const getGeoLocation = (address = '', onRequestSuccess = () => {}, onRequestFailure = () => {}) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?language=en&address=${address}`;
-    callApi(url, null, onSuccess, onFailure);
+    callApi(url, null, onRequestSuccess, onRequestFailure);
 }

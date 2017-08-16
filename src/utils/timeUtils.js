@@ -11,8 +11,7 @@ const shortDateMask = 'MMM DD, YYYY'; // e.g. Aug 16, 2017
 // time returned from darksky is in seconds, so it times 1000 here
 export const getTime = (time, timezone = {}) => {
     const sec = (typeof time === 'number') ? time * 1000 : Date.now();
-    const date = new Date(time).toLocaleString('en-US', { timeZone: timezone });
-
+    const date = new Date(sec).toLocaleString('en-US', { timeZone: timezone });
     return new Date(date);
 };
 
