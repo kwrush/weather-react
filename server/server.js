@@ -36,12 +36,12 @@ app.get('/api/darksky', function (req, res) {
                     res.status(response.status).json({
                         'Message:': 'Fail to fetch data from Dark Sky server'
                     })
-
-                    return response.json();
                 }
+
+                return response.json();
             })
             .then(function (payload) {
-                res.status(200).json(payload);
+                res.type('application/json').status(200).json(payload);
             })
     } catch (err) {
         // Debug
