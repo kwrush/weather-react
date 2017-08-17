@@ -47,7 +47,7 @@ const callApi = async (url, config, onSuccess, onFailure) => {
 
 export const getWeather = (geoInfo = {}, onRequestSuccess = () => {}, onRequestFailure = () => {}) => {
     const {latitude, longitude} = geoInfo;
-    const url = `/api/darksky?latitude=${latitude}&longitude=${longitude}&exclude=minutely,alerts,flags`;
+    const url = `/api/darksky?latitude=${latitude}&longitude=${longitude}&exclude=minutely,alerts,flags&units=auto`;
     callApi(url, null, onRequestSuccess, onRequestFailure);
 }
 

@@ -26,7 +26,8 @@ app.get('/api/darksky', function (req, res) {
         console.log(req.query);
         var geoInfo = req.query.latitude + ',' + req.query.longitude;
         var exclude = req.query.exclude;
-        var url = API_URL + geoInfo + '?exclude=' + exclude;
+        var units = req.query.units;
+        var url = API_URL + geoInfo + '?exclude=' + exclude + '&units=' + units;
         // debug
         console.log('Fetching ' + url);
 

@@ -4,63 +4,64 @@ import { performSearchIfNeeded, addCity } from '../store/actions';
 import store from '../store/store';
 import City from '../components/City';
 
+// mock weather dataset for interface proptyping
 const mockData = fromJS({
-  "id":"ChIJVXealLU_xkcRja_At0z9AGY",
-  "fullName":"Amsterdam, Netherlands",
-  "shortName":"Amsterdam",
-  "latitude":52.3702157,
-  "longitude":4.895167900000001,
-  "weather":{
-    "updatedAt":1503001499,
-    "timezone":"Europe/Amsterdam",
-    "currently":{
-      "precipProbability":"0%",
-      "windSpeed":"NaNm/s",
-      "windDirection":226,
-      "date":"Aug 17, 2017",
-      "temperature":"64°",
-      "summary":"Clear",
-      "icon":"CLEAR_NIGHT"
+    "id": "ChIJVXealLU_xkcRja_At0z9AGY",
+    "fullName": "Amsterdam, Netherlands",
+    "shortName": "Amsterdam",
+    "latitude": 52.3702157,
+    "longitude": 4.895167900000001,
+    "weather": {
+        "updatedAt": 1503004916,
+        "timezone": "Europe/Amsterdam",
+        "currently": {
+            "precipProbability": "0%",
+            "windSpeed": "6m/s",
+            "windDirection": 225,
+            "date": "Aug 17, 2017",
+            "temperature": "18°",
+            "summary": "Clear",
+            "icon": "CLEAR_NIGHT"
+        },
+        "daily": [
+            {
+                "precipProbability": 0.19,
+                "temperatureMin": "16°",
+                "temperatureMax": "20°",
+                "icon": "PARTLY_CLOUDY_NIGHT",
+                "day": "Today"
+            },
+            {
+                "precipProbability": 0.34,
+                "temperatureMin": "16°",
+                "temperatureMax": "19°",
+                "icon": "RAIN",
+                "day": "Fri"
+            },
+            {
+                "precipProbability": 0.58,
+                "temperatureMin": "14°",
+                "temperatureMax": "19°",
+                "icon": "RAIN",
+                "day": "Sat"
+            },
+            {
+                "precipProbability": 0.14,
+                "temperatureMin": "15°",
+                "temperatureMax": "19°",
+                "icon": "PARTLY_CLOUDY_NIGHT",
+                "day": "Sun"
+            },
+            {
+                "precipProbability": 0.05,
+                "temperatureMin": "15°",
+                "temperatureMax": "21°",
+                "icon": "PARTLY_CLOUDY_DAY",
+                "day": "Mon"
+            }
+        ]
     },
-    "daily":[
-      {
-        "precipProbability":0.19,
-        "temperatureMin":"60°",
-        "temperatureMax":"68°",
-        "icon":"PARTLY_CLOUDY_NIGHT",
-        "day":"Today"
-      },
-      {
-        "precipProbability":0.34,
-        "temperatureMin":"59°",
-        "temperatureMax":"67°",
-        "icon":"RAIN",
-        "day":"Fri"
-      },
-      {
-        "precipProbability":0.58,
-        "temperatureMin":"57°",
-        "temperatureMax":"65°",
-        "icon":"RAIN",
-        "day":"Sat"
-      },
-      {
-        "precipProbability":0.14,
-        "temperatureMin":"58°",
-        "temperatureMax":"66°",
-        "icon":"PARTLY_CLOUDY_NIGHT",
-        "day":"Sun"
-      },
-      {
-        "precipProbability":0.05,
-        "temperatureMin":"58°",
-        "temperatureMax":"70°",
-        "icon":"PARTLY_CLOUDY_DAY",
-        "day":"Mon"
-      }
-    ]
-  },
-  "isFetching":false
+    "isFetching": false
 });
 
 const App = (props) => {

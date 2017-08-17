@@ -33,7 +33,7 @@ export const formatWeatherData = (data) => {
             timezone: data.timezone,
             currently: Map({
                 precipProbability: Math.round(currently.precipProbability) * 100 + '%',
-                windSpeed: Math.round(currently.windSeep) + 'm/s',
+                windSpeed: Math.round(currently.windSpeed) + 'm/s',
                 windDirection: currently.windBearing,
                 date: getShortDate(currently.time, data.timezone),
                 temperature: Math.round(currently.temperature) + '°',
