@@ -5,6 +5,10 @@
 import { Map, List } from 'immutable';
 import { getWeekday, getShortDate } from './timeUtils';
 
+function iconFormatter(iconString) {
+    return iconString.replace(/\-/g, '_').toUpperCase();
+}
+
 export const formatWeatherData = (data) => {
     const currently = data.currently;
     const daily = data.daily.data;
@@ -14,9 +18,9 @@ export const formatWeatherData = (data) => {
     for (let i = 0; i < days; i++) {
         dailyList = dailyList.push(Map({
             precipProbability: daily[i].precipProbability,
-            temperatureMin: daily[i].temperatureMin,
-            temperatureMax: daily[i].temperatureMax,
-            icon: daily[i].icon,
+            temperatureMin: Math.round(daily[i].temperatureMin) + '°',
+            temperatureMax: Math.round(daily[i].temperatureMax) + '°',
+            icon: iconFormatter(daily[i].icon),
             day: i === 0 ? 'Today' : getWeekday(daily[i].time, data.timezone)
         }));
     }
@@ -28,13 +32,13 @@ export const formatWeatherData = (data) => {
             updatedAt: data.currently.time,
             timezone: data.timezone,
             currently: Map({
-                precipProbability: currently.precipProbability,
-                windSpeed: currently.windSeep,
-                windDirection: currently.wind,
+                precipProbability: Math.round(currently.precipProbability) * 100 + '%',
+                windSpeed: Math.round(currently.windSeep) + 'm/s',
+                windDirection: currently.windBearing,
                 date: getShortDate(currently.time, data.timezone),
-                temperature: currently.temperature,
+                temperature: Math.round(currently.temperature) + '°',
                 summary: currently.summary,
-                icon: currently.icon
+                icon: iconFormatter(currently.icon)
             }),
             daily: dailyList
         })
