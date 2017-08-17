@@ -1,18 +1,21 @@
-/* import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App';  */
-import {getWeather, getGeoLocation} from './utils/api';
+// test
+import { performSearchIfNeeded, addCity } from './store/actions';
+import store from './store/store';
 
-getGeoLocation('Los Angelos', data => {
-    console.log(data);
-}, error => {
-    console.log(error);
-})
-
-
-/* ReactDOM.render(
-    <App />,
+ReactDOM.render(
+    <input type="text" onKeyUp={e => {
+        e.preventDefault();
+        store.dispatch(performSearchIfNeeded(e.target.value));
+        const q = store.getState().getIn(['searchEntities', 'searchQuery']);
+        const results = store.getState().getIn(['searchEntities', 'results']);
+        if (q.length === 9 && results.size === 1) {
+            // add city(amsterdam) and fetch weather
+            store.dispatch(addCity(results.get(0)));
+        }
+    }} />,
     document.getElementById('root')
-);   */
+);
 
 

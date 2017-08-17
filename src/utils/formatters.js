@@ -24,18 +24,20 @@ export const formatWeatherData = (data) => {
     return Map({
         latitude: data.latitude,
         longitude: data.longitude,
-        updatedAt: data.currently.time,
-        timezone: data.timezone,
-        currently: Map({
-            precipProbability: currently.precipProbability,
-            windSpeed: currently.windSeep,
-            windDirection: currently.wind,
-            date: getShortDate(currently.time, data.timezone),
-            temperature: currently.temperature,
-            summary: currently.summary,
-            icon: currently.icon
-        }),
-        daily: dailyList
+        weather: Map({
+            updatedAt: data.currently.time,
+            timezone: data.timezone,
+            currently: Map({
+                precipProbability: currently.precipProbability,
+                windSpeed: currently.windSeep,
+                windDirection: currently.wind,
+                date: getShortDate(currently.time, data.timezone),
+                temperature: currently.temperature,
+                summary: currently.summary,
+                icon: currently.icon
+            }),
+            daily: dailyList
+        })
     });
 }
 
@@ -45,6 +47,7 @@ export const formatGeoLocation = (data) => {
     const results = data.results;
     return List(results.map(result => {
         return Map({
+            id: result.place_id,
             fullName: result.formatted_address,
             shortName: result.address_components[0].short_name,
             latitude: result.geometry.location.lat,
