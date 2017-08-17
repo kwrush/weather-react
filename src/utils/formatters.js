@@ -9,10 +9,10 @@ export const formatWeatherData = (data) => {
     const currently = data.currently;
     const daily = data.daily.data;
     const days = 5;
-    const dailyList = List();
+    let dailyList = List();
 
     for (let i = 0; i < days; i++) {
-        dailyList.push(Map({
+        dailyList = dailyList.push(Map({
             precipProbability: daily[i].precipProbability,
             temperatureMin: daily[i].temperatureMin,
             temperatureMax: daily[i].temperatureMax,

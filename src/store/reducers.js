@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
 import actionTypes from './actionTypes';
-import { List, Map, Record } from 'immutable';
+import { List, Map } from 'immutable';
 
 function searchEntities (
     state = Map({
@@ -78,18 +78,15 @@ function fetchWeather (
 ) {
     switch (action.type) {
         case actionTypes.REQUEST_FETCH_WEATHER:
-            return state.merge(Map({
+            return state.merge({
                 isFetching: true,
                 latitude: action.city.get('latitude'),
                 longitude: action.city.get('longitude')
-            }));
+            });
         case actionTypes.RESOLVE_FETCH_WEATHER:
-            return state.merge(Map({
-                isFetching: false,
-                latitude: action.latitude,
-                longitude: action.longitude,
-                weather: action.weather
-            }));
+            return state
+                .merge({isFetching: false})
+                .merge(action.city);
         case actionTypes.REJECT_FETCH_WEATHER:
             return state.set('isFetching', false);
         default:
