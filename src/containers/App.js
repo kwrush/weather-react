@@ -61,7 +61,7 @@ const mockData = fromJS({
             }
         ]
     },
-    "isFetching": false
+    "isFetching": true
 });
 
 const App = (props) => {

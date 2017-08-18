@@ -1,0 +1,42 @@
+.button {
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: none;
+    line-height: 22px;
+    text-align: center;
+    outline: none;
+
+    & > svg {
+        fill-opacity: 0.5;
+    }
+
+    &:hover > svg {
+        fill-opacity: 1;
+    }
+}
+
+.remove-button {
+    float: left;
+    &:hover > svg {
+        fill: red;
+    }
+}
+
+.refresh-button {
+    float: right;
+}
+
+.spin {
+    @include animation(spin, 0, 1s, linear, infinite);
+}
+
+.ctrl-buttons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 4px 4px 0 4px;
+    width: 100%;
+    height: 26px;
+}

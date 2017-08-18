@@ -52,11 +52,11 @@ export const NormalSkycon = (props) => {
 SmallSkycon.propTypes = {
     color: PropTypes.string,
     icon: PropTypes.string.isRequired,
-    autoplay: PropTypes.boolean
+    autoplay: PropTypes.bool
 };
 
 NormalSkycon.propTypes = {
     color: PropTypes.string,
     icon: PropTypes.string.isRequired,
-    autoplay: PropTypes.boolean
+    autoplay: PropTypes.bool
 };

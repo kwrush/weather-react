@@ -1,25 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Ionicon from 'react-ionicons';
 
 export const UpdateButton = ({ onClick, isUpdating }) => (
     <button 
-        className={`button update-button${isUpdating ? ' spin' : ''}`}
+        className="button refresh-button"
         onClick={onClick}
     >
+        <Ionicon 
+            icon="ion-refresh" 
+            className={`${!!isUpdating ? 'spin' : ''}`} 
+            fontSize="20px"
+        />
     </button>
 );
 
 export const RemoveButton = ({ onClick }) => (
-    <button 
-        className="button remove-button"
-        onClick={onClick}
-    >
+    <button className="button remove-button" onClick={onClick}>
+        <Ionicon icon="ion-minus-circled" fontSize="20px"/>
     </button>
 );
 
 UpdateButton.propTypes = {
     onClick: PropTypes.func.isRequired,
-    isUpdating: PropTypes.func
+    isUpdating: PropTypes.bool
 }
 
 RemoveButton.propTypes = {

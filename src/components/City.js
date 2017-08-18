@@ -24,15 +24,15 @@ const City = ({ cityEntity, onUpdateClick, onRemoveClick }) => {
         .toJS();  
 
     return (
-            <div className="city-entity">
+            <div className="city-entity card">
                 <header className="city-header">
                     <h3 className="city-name">{cityEntity.get('shortName')}</h3>
                     <p className="city-date">{cityEntity.getIn(['weather', 'currently', 'date'])}</p>
                 </header>
-                <section className="city-weather">
-                    <div className="current-weather">
+                <section className="current-weather">
+                    <div className="current-weather-summary">
                         <NormalSkycon icon={cityEntity.getIn(['weather', 'currently', 'icon'])} />
-                        <span className="current-weather-temp">
+                        <span className="current-temp">
                             {cityEntity.getIn(['weather', 'currently', 'temperature'])}
                         </span>
                     </div>
@@ -48,11 +48,11 @@ const City = ({ cityEntity, onUpdateClick, onRemoveClick }) => {
                     </div>
                 </section>
                 <section className="city-forecast">
-                    <ul className="city-forecast-daily">
+                    <ul className="daily-forecast">
                         {daily}
                     </ul>
                 </section>
-                <div className="entity-buttons">
+                <div className="ctrl-buttons">
                     <UpdateButton onClick={onUpdateClick} isUpdating={cityEntity.get('isFetching')} />
                     <RemoveButton onClick={onRemoveClick} />
                 </div>
