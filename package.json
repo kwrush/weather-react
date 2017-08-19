@@ -9,6 +9,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-immutable-proptypes": "^2.1.0",
+    "react-ionicons": "^1.5.7",
     "react-scripts": "0.9.5",
     "react-skycons": "^0.3.0",
     "react-transition-group": "^2.2.0",
@@ -19,10 +20,13 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "fetch-mock": "^5.12.2"
+    "fetch-mock": "^5.12.2",
+    "node-sass": "^4.5.3",
+    "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "^4.0.2"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
+    "build-css": "node-sass-chokidar src/styles/ -o src/styles/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "set PORT=3000 && react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
