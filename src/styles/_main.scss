@@ -13,6 +13,28 @@ $primary-color: #fff;
     }
 }
 
+@include keyframes(wobble) {
+    0% {
+        @include rotate(0);
+    }
+
+    25% {
+        @include rotate(20);
+    }
+
+    50% {
+        @include rotate(0);
+    }
+
+    75% {
+        @include rotate(-20);
+    } 
+
+    100% {
+        @include rotate(0);
+    }
+}
+
 *,
 html,
 body {
@@ -20,6 +42,13 @@ body {
     font-size: $font-size;
     font-family: $font-family;
     box-sizing: border-box; 
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 

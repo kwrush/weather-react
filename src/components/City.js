@@ -1,57 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Fade from './Fade';
+//import Fade from './Fade';
+import Currently from './Currently';
+import Daily from './Daily';
 import { UpdateButton, RemoveButton } from './Buttons';
-import { SmallSkycon, NormalSkycon } from './SkyconsWrap';
 
 const City = ({ cityEntity, onUpdateClick, onRemoveClick }) => {
-    const daily = cityEntity.getIn(['weather', 'daily'])
-        .map((data, index) => {
-            return (
-                <li className="forecast-per-day" key={index}>
-                    <div className="forecast-date">{data.get('day')}</div>
-                    <div className="forecast-summary">
-                        <SmallSkycon icon={data.get('icon')} />
-                    </div>
-                    <div className="foreact-temp-minmax">
-                        <span className="forecast-temp-max">{data.get('temperatureMax')}</span>
-                        <span className="forecast-temp-min">{data.get('temperatureMin')}</span>
-                    </div>
-                </li>
-            );
-        })
-        .toJS();  
 
     return (
-            <div className="city-entity card">
+            <div className="city-entity card flex-container">
                 <header className="city-header">
                     <h3 className="city-name">{cityEntity.get('shortName')}</h3>
                     <p className="city-date">{cityEntity.getIn(['weather', 'currently', 'date'])}</p>
                 </header>
-                <section className="current-weather">
-                    <div className="current-weather-summary">
-                        <NormalSkycon icon={cityEntity.getIn(['weather', 'currently', 'icon'])} />
-                        <span className="current-temp">
-                            {cityEntity.getIn(['weather', 'currently', 'temperature'])}
-                        </span>
-                    </div>
-                    <div className="current-weather-detail">
-                        <span className="current-precip">
-                            {cityEntity.getIn(['weather', 'currently', 'precipProbability'])}
-                        </span>
-                        <span className="current-wind-speed">
-                            {cityEntity.getIn(['weather', 'currently', 'windspeed'])}
-                        </span>
-                        <span className="current-wind-direct">
-                        </span>
-                    </div>
-                </section>
-                <section className="city-forecast">
-                    <ul className="daily-forecast">
-                        {daily}
-                    </ul>
-                </section>
+                <Currently 
+                    current={cityEntity.getIn(['weather', 'currently'])} 
+                />
+                <Daily 
+                    daily={cityEntity.getIn(['weather', 'daily'])}
+                />
                 <div className="ctrl-buttons">
                     <UpdateButton onClick={onUpdateClick} isUpdating={cityEntity.get('isFetching')} />
                     <RemoveButton onClick={onRemoveClick} />

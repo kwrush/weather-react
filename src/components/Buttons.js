@@ -17,7 +17,7 @@ export const UpdateButton = ({ onClick, isUpdating }) => (
 
 export const RemoveButton = ({ onClick }) => (
     <button className="button remove-button" onClick={onClick}>
-        <Ionicon icon="ion-minus-circled" fontSize="20px"/>
+        <Ionicon icon="ion-close-circled" fontSize="20px"/>
     </button>
 );
 
