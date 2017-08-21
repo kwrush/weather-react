@@ -2,29 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Ionicon from 'react-ionicons';
-import { SmallSkycon } from './SkyconsWrap';
+import SkyconsWrap from './SkyconsWrap';
 
 const Daily = ({ daily }) => {
 
     const forecasts = daily.map((forecast, index) => {
         return (
-            <li className="forecast-per-day flex-item" key={index}>
-                <div className="forecast-date item-box-alt">{forecast.get('day')}</div>
-                <div className="forecast-summary item-box-alt">
-                    <SmallSkycon icon={forecast.get('icon')} />
+            <li className="flex-item" key={index}>
+                <div className="forecast-date inner-item-box">{forecast.get('day')}</div>
+                <div className="inner-item-box">
+                    <SkyconsWrap icon={forecast.get('icon')} size="m" />
                 </div>
-                <div className="foreact-temp-minmax item-box-alt">
-                    <span className="forecast-temp-max">{forecast.get('temperatureMax')}</span>
-                    <span className="forecast-temp-min">{forecast.get('temperatureMin')}</span>
+                <div className="forecast-temp-minmax">
+                    <span className="temp-max">{forecast.get('temperatureMax')}</span>
+                    <span className="temp-min">{forecast.get('temperatureMin')}</span>
                 </div>
             </li>
         );
     });
 
     return (
-        <section className="item-box">
-            <ul className="daily-forecast flex-row-section">
-                {forecasts.toJS()}
+        <section className="outer-item-box">
+            <ul className="flex-section">
+                {forecasts}
             </ul>
         </section>
     );
@@ -36,7 +36,18 @@ Daily.propTypes = {
             precipProbability: PropTypes.number.isRequired,
             temperatureMin: PropTypes.string.isRequired,
             temperatureMax: PropTypes.string.isRequired,
-            icon: PropTypes.string.isRequired,
+            icon: PropTypes.oneOf([
+                'CLEAR_DAY',
+                'CLEAR_NIGHT',
+                'PARTLY_CLOUDY_DAY',
+                'PARTLY_CLOUDY_NIGHT',
+                'CLOUDY',
+                'RAIN',
+                'SLEET',
+                'SNOW',
+                'WIND',
+                'FOG'
+            ]),
             day: PropTypes.string.isRequired
         })
     )

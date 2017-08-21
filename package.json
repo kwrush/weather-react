@@ -10,6 +10,7 @@
     "react-dom": "^15.6.1",
     "react-immutable-proptypes": "^2.1.0",
     "react-ionicons": "^1.5.7",
+    "react-redux": "^5.0.6",
     "react-scripts": "0.9.5",
     "react-skycons": "^0.3.0",
     "react-transition-group": "^2.2.0",

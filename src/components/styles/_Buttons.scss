@@ -7,10 +7,6 @@
     height: 26px;
 }
 
-.spin {
-    @include animation(spin, 0, 1s, linear, infinite);
-}
-
 .button {
     padding: 0;
     width: 22px;

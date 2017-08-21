@@ -405,17 +405,17 @@ th {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   25% {
-    -ms-transform: rotate(20deg);
-    -webkit-transform: rotate(20deg);
-    transform: rotate(20deg); }
+    -ms-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg); }
   50% {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   75% {
-    -ms-transform: rotate(-20deg);
-    -webkit-transform: rotate(-20deg);
-    transform: rotate(-20deg); }
+    -ms-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
   100% {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
@@ -427,17 +427,17 @@ th {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   25% {
-    -ms-transform: rotate(20deg);
-    -webkit-transform: rotate(20deg);
-    transform: rotate(20deg); }
+    -ms-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg); }
   50% {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   75% {
-    -ms-transform: rotate(-20deg);
-    -webkit-transform: rotate(-20deg);
-    transform: rotate(-20deg); }
+    -ms-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
   100% {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
@@ -449,17 +449,17 @@ th {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   25% {
-    -ms-transform: rotate(20deg);
-    -webkit-transform: rotate(20deg);
-    transform: rotate(20deg); }
+    -ms-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg); }
   50% {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   75% {
-    -ms-transform: rotate(-20deg);
-    -webkit-transform: rotate(-20deg);
-    transform: rotate(-20deg); }
+    -ms-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
   100% {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
@@ -479,14 +479,58 @@ ol {
   padding: 0;
   list-style: none; }
 
-.ctrl-buttons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 5px;
-  width: 100%;
-  height: 26px; }
+.card {
+  margin: 20px auto;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .card:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 
+/**
+ * Layout classes
+ */
+.flex-container {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: space-around;
+  -ms-justify-content: space-around;
+  justify-content: space-around;
+  -ms-flex-pack: space-around; }
+
+.flex-section {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center; }
+
+.flex-item {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1; }
+
+.outer-item-box {
+  margin-top: 12px; }
+
+.inner-item-box {
+  margin-top: 8px; }
+
+/**
+ * Animation classes
+ */
 .spin {
   -webkit-animation-name: spin;
   -webkit-animation-delay: 0;
@@ -501,6 +545,35 @@ ol {
   /* this prevents the animation from restarting! */
   animation-timing-function: linear;
   animation-iteration-count: infinite; }
+
+.wobble {
+  -webkit-animation-name: wobble;
+  -webkit-animation-delay: 0;
+  -webkit-animation-duration: 7s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: wobble;
+  animation-delay: 0;
+  animation-duration: 7s;
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite; }
+
+.fadeout-exit {
+  opacity: 1; }
+
+.fadeout-exit.fadeout-exit-active {
+  opacity: 0; }
+
+.ctrl-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  width: 100%;
+  height: 26px; }
 
 .button {
   padding: 0;
@@ -524,84 +597,9 @@ ol {
 .refresh-button {
   float: right; }
 
-.card {
-  margin: 20px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-  .card:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-
-.flex-container {
-  margin: 0;
-  padding: 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-
-.flex-row-section,
-.flex-col-section {
-  margin: auto;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-
-.flex-row-section {
-  -webkit-justify-content: center;
-  -ms-justify-content: center;
-  justify-content: center;
-  -ms-flex-pack: center;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row; }
-
-.flex-col-section {
-  height: 100%;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-
-.flex-item {
-  -webkit-flex-grow: 1;
-  -ms-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-justify-content: center;
-  -ms-justify-content: center;
-  justify-content: center;
-  -ms-flex-pack: center; }
-
-.item-box {
-  margin-top: 12px; }
-
-.item-box-alt {
-  margin-top: 8px; }
-
-.wobble {
-  -webkit-animation-name: wobble;
-  -webkit-animation-delay: 0;
-  -webkit-animation-duration: 5s;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-  animation-name: wobble;
-  animation-delay: 0;
-  animation-duration: 5s;
-  animation-fill-mode: forwards;
-  /* this prevents the animation from restarting! */
-  animation-timing-function: linear;
-  animation-iteration-count: infinite; }
-
 .city-entity {
   position: relative;
-  margin: 0 auto;
-  padding-bottom: 21px;
+  padding: 20px 10px;
   width: 380px;
   text-align: center;
   overflow: hidden; }
@@ -612,48 +610,47 @@ ol {
     opacity: 1; }
 
 .city-header {
-  padding-top: 12px;
   text-transform: uppercase; }
   .city-header .city-name {
     font-size: 1.2em; }
-  .city-header .city-name,
   .city-header .city-date {
     margin-top: 5px; }
 
 .current-weather-condition {
   position: relative;
-  width: 100%;
-  height: 50px; }
+  width: 100%; }
   .current-weather-condition .current-temp {
-    margin-left: -10px;
     font-size: 1.5em;
     display: inline-block;
-    width: 50px;
-    height: 50px;
-    line-height: 50px; }
+    width: 45px;
+    height: 45px;
+    line-height: 45px; }
   .current-weather-condition .skycon-wrap {
     vertical-align: top; }
 
-.current-weather-summary {
+.current-summary {
   width: 100%;
   height: 30px;
-  line-height: 30px;
-  font-size: 1.2em; }
+  line-height: 30px; }
 
 .current-weather-detail {
   height: 30px;
   line-height: 30px; }
   .current-weather-detail .detail-item {
-    margin-right: 8px; }
+    margin-right: 12px; }
     .current-weather-detail .detail-item > svg {
       margin-right: 4px;
       vertical-align: text-top; }
 
-.daily-forecast {
-  -webkit-justify-content: space-around;
-  -ms-justify-content: space-around;
-  justify-content: space-around;
-  -ms-flex-pack: space-around;
-  -webkit-flex-grow: 1;
-  -ms-flex-grow: 1;
-  flex-grow: 1; }
+.forecast-date {
+  text-transform: uppercase; }
+
+.forecast-temp-minmax .temp-max,
+.forecast-temp-minmax .temp-min {
+  font-size: 0.95em; }
+
+.forecast-temp-minmax .temp-max {
+  margin-right: 3px; }
+
+.forecast-temp-minmax .temp-min {
+  opacity: 0.7; }

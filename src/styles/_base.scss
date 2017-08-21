@@ -19,7 +19,7 @@ $primary-color: #fff;
     }
 
     25% {
-        @include rotate(20);
+        @include rotate(10);
     }
 
     50% {
@@ -27,7 +27,7 @@ $primary-color: #fff;
     }
 
     75% {
-        @include rotate(-20);
+        @include rotate(-10);
     } 
 
     100% {

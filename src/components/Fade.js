@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
-const Fade = ({ children }) => {
-    <CSSTransitionGroup
-        transitionName='fadeout'
-        transitionLeaveTimeout={300}
-        transitionLeave
+const Fade = ({ children }) => (
+    <CSSTransition
+        classNames="fadeout"
+        timeout={300}
     >
         {children}
-    </CSSTransitionGroup>
-}
+    </CSSTransition>
+)
 
 Fade.propTypes = {
     children: PropTypes.element

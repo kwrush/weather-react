@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-//import Fade from './Fade';
+import Fade from './Fade';
 import Currently from './Currently';
 import Daily from './Daily';
 import { UpdateButton, RemoveButton } from './Buttons';
@@ -9,7 +9,8 @@ import { UpdateButton, RemoveButton } from './Buttons';
 const City = ({ cityEntity, onUpdateClick, onRemoveClick }) => {
 
     return (
-            <div className="city-entity card flex-container">
+        <Fade>
+            <div className="city-entity card">
                 <header className="city-header">
                     <h3 className="city-name">{cityEntity.get('shortName')}</h3>
                     <p className="city-date">{cityEntity.getIn(['weather', 'currently', 'date'])}</p>
@@ -25,6 +26,7 @@ const City = ({ cityEntity, onUpdateClick, onRemoveClick }) => {
                     <RemoveButton onClick={onRemoveClick} />
                 </div>
             </div>
+        </Fade>
     );
 };
 

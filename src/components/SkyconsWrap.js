@@ -2,61 +2,52 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Skycons from 'react-skycons';
 
-export const SmallSkycon = (props) => {
+const sizeOptions = {
+    's': {
+        containerSize: { width: 20, height: 20 },
+        skyconsSize: { width: 40, height: 40 }
+    },
 
-    const {color, icon, autoplay} = props;
+    'm': {
+        containerSize: { width: 32, height: 32 },
+        skyconsSize: { width: 64, height: 64 }
+    },
+
+    'l': {
+        containerSize: { width: 45, height: 45 },
+        skyconsSize: { width: 80, height: 80 }
+    }
+};
+
+const SkyconsWrap = (props) => {
+    const {color, icon, autoplay, size} = props;
+    const opt = sizeOptions[size];
 
     return (
         <span 
             className="skycon-wrap"
             style={{
                 display: 'inline-block',
-                width: '32px',
-                height: '32px'
+                width: `${opt.containerSize.width}px`,
+                height: `${opt.containerSize.height}px`
             }}
         >
             <Skycons 
                 icon={icon}
                 color={`${color ? color : 'black'}`} 
                 autoplay={autoplay}
-                width={64}
-                height={64}
+                width={opt.skyconsSize.width}
+                height={opt.skyconsSize.height}
             />
         </span>
     );
-};
+}
 
-export const NormalSkycon = (props) => {
-    const {color, icon, autoplay} = props;
-
-    return (
-        <span 
-            className="skycon-wrap"
-            style={{
-                display: 'inline-block',
-                width: '50px',
-                height: '50px'
-            }}
-        >
-            <Skycons 
-                icon={icon}
-                color={`${color ? color : 'black'}`} 
-                autoplay={autoplay}
-                width={84}
-                height={84}
-            />
-        </span>
-    );
-};
-
-SmallSkycon.propTypes = {
-    color: PropTypes.string,
+SkyconsWrap.propTypes = {
     icon: PropTypes.string.isRequired,
-    autoplay: PropTypes.bool
-};
-
-NormalSkycon.propTypes = {
     color: PropTypes.string,
-    icon: PropTypes.string.isRequired,
-    autoplay: PropTypes.bool
-};
+    autoplay: PropTypes.bool,
+    size: PropTypes.oneOf(['s', 'm', 'l'])
+}
+
+export default SkyconsWrap;

@@ -71,15 +71,19 @@ export const fetchWeather = (id) => {
             longitude: cityEntity.get('longitude')
         };
         dispatch(requestWeather(cityEntity));
-        getWeather(
-            geoCoordinate, 
-            (data) => {
-                const formattedData = cityEntity.merge(formatWeatherData(data));
-                dispatch(requestWeatherSuccess(formattedData));
-            }, 
-            (error) => {
-                return dispatch(requestWeatherFail(error));
-            });
+        return new Promise((resolve, reject) => {
+            getWeather(
+                geoCoordinate, 
+                (data) => {
+                    const formattedData = cityEntity.merge(formatWeatherData(data));
+                    dispatch(requestWeatherSuccess(formattedData));
+                    resolve();
+                }, 
+                (error) => {
+                    return dispatch(requestWeatherFail(error));
+                    reject();
+                });
+        });
     };
 }
 
@@ -87,16 +91,20 @@ export const performSearch = (query) => {
     return (dispatch, getState) => {
         dispatch(requestSearch(query));
 
-        getGeoLocation(
-            getState().getIn(['searchEntities', 'searchQuery']), 
-            (results) => {
-                dispatch(formatResults(results));
-                dispatch(requestSearchSuccess(getState().getIn(['searchEntities', 'results'])));
-            },
-            (error) => {
-                dispatch(requestSearchFail(error));
-            }
-        );
+        return new Promise((resolve, reject) => {
+            getGeoLocation(
+                getState().getIn(['searchEntities', 'searchQuery']), 
+                (results) => {
+                    dispatch(formatResults(results));
+                    dispatch(requestSearchSuccess(getState().getIn(['searchEntities', 'results'])));
+                    resolve();
+                },
+                (error) => {
+                    dispatch(requestSearchFail(error));
+                    reject();
+                }
+            );
+        });
     }
 }
 
