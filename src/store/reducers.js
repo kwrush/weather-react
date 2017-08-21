@@ -70,24 +70,40 @@ function addCity (
 function fetchWeather (
     state = Map({
         isFetching: false,
-        latitude: undefined,
-        longitude: undefined,
         weather: Map()
     }), 
     action
 ) {
     switch (action.type) {
         case actionTypes.REQUEST_FETCH_WEATHER:
-            return state.merge({
-                isFetching: true,
-                latitude: action.city.get('latitude'),
-                longitude: action.city.get('longitude')
-            });
+            return state.set('isFetching', true);
         case actionTypes.RESOLVE_FETCH_WEATHER:
             return state
-                .merge({isFetching: false})
+                .set('isFetching', false)
                 .merge(action.city);
         case actionTypes.REJECT_FETCH_WEATHER:
+            return state.set('isFetching', false);
+        default:
+            return state;
+    }
+}
+
+function fetchGeoCoordinates (
+    state = Map({
+        isFetching: false,
+        latitude: undefined,
+        longitude: undefined
+    }), 
+    action
+) {
+    switch (action.type) {
+        case actionTypes.REQUEST_FETCH_GEO:
+            return state.set('isFetching', true);
+        case actionTypes.RESOLVE_FETCH_GEO:
+            return state
+                .set('isFetching', false)
+                .merge(action.city);
+        case actionTypes.REJECT_FETCH_GEO:
             return state.set('isFetching', false);
         default:
             return state;
@@ -97,9 +113,13 @@ function fetchWeather (
 function cities (state = Map(), action) {
     switch (action.type) {
         case actionTypes.ADD_CITY:
-            return state.set(action.id, addCity(action.cityInfo, action));
+            return state.set(action.id, action.cityInfo);
         case actionTypes.REMOVE_CITY:
             return state.remove(action.id);
+        case actionTypes.REQUEST_FETCH_GEO:
+        case actionTypes.RESOLVE_FETCH_GEO:
+        case actionTypes.REJECT_FETCH_GEO:
+            return state.set(action.id, fetchGeoCoordinates(action.city, action));
         case actionTypes.REQUEST_FETCH_WEATHER:
         case actionTypes.RESOLVE_FETCH_WEATHER:
         case actionTypes.REJECT_FETCH_WEATHER:

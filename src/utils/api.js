@@ -13,7 +13,7 @@ const checkResponseStatus = (response) => {
     return response;
 }
 
-const callApi = async (url, config, onSuccess, onFailure) => {
+const callApi = async (url, config) => {
     try {
         const response = await fetch(url, config)
             .then(checkResponseStatus)
@@ -21,13 +21,12 @@ const callApi = async (url, config, onSuccess, onFailure) => {
                 throw error;
             });
 
-        const json = await response.json();  
-        onSuccess(json);
+        return response.json();
 
     } catch (error) {
         const response = error.response;
         if (typeof response === 'undefined') {
-            onFailure(error);
+            throw error;
         } else {
             error.status = response.status;
             error.statusText = response.statusText;
@@ -40,18 +39,22 @@ const callApi = async (url, config, onSuccess, onFailure) => {
                 error.message = text;
             }
 
-            onFailure(error);
+            throw error;
         }
     } 
 };
 
-export const getWeather = (geoInfo = {}, onRequestSuccess = () => {}, onRequestFailure = () => {}) => {
+export const getWeather = async (geoInfo = {}) => {
     const {latitude, longitude} = geoInfo;
-    const url = `/api/darksky?latitude=${latitude}&longitude=${longitude}&exclude=minutely,alerts,flags&units=auto`;
-    callApi(url, null, onRequestSuccess, onRequestFailure);
+    const url = `/api/weather?latitude=${latitude}&longitude=${longitude}`;
+    return await callApi(url, null);
 }
 
-export const getGeoLocation = (address = '', onRequestSuccess = () => {}, onRequestFailure = () => {}) => {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?language=en&address=${address}`;
-    callApi(url, null, onRequestSuccess, onRequestFailure);
+export const getGeoSuggestion = async (searchQuery = '') => {
+    return await callApi(`/api/autocomplete?input=${searchQuery}`, null);
+}
+
+export const getGeoLocation = async (placeId = '') => {
+    console.log(placeId);
+    return await callApi(`/api/geolocation?place_id=${placeId}`, null);
 }

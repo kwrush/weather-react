@@ -1,10 +1,11 @@
-import { getWeather, getGeoLocation } from '../api';
+import { getWeather, getGeoSuggestion, getGeoLocation } from '../api';
 import fetchMock from 'fetch-mock';
 
 const geo = {
     latitude: 30,
     longitude: 40
 };
+
 const address = 'Amsterdam';
 
 describe('fetch weather and geo location', () => {
@@ -21,6 +22,7 @@ describe('fetch weather and geo location', () => {
         status: 200,
         header: {'Content-Type': 'application/json'}
     };
+
     const fakeGeo = {
         body: {
             geo: {
@@ -33,39 +35,46 @@ describe('fetch weather and geo location', () => {
         header: {'Content-Type': 'application/json'}
     };
 
+    const autocomplete = {
+        results: [
+            'Apeldoorn',
+            'Appleton',
+            'Apopka'
+        ]
+    }
+
     afterEach(() => {
         fetchMock.restore();
     });
 
-    it('should fetch weather data from api', done => {
-        fetchMock.mock(`/api/darksky?latitude=${geo.latitude}&longitude=${geo.longitude}&exclude=minutely,alerts,flags`, fakeWeather);
-        getWeather(geo, data => {
+    it('should fetch weather data from api', () => {
+        fetchMock.mock(`/api/weather?latitude=${geo.latitude}&longitude=${geo.longitude}`, fakeWeather);
+        expect.assertions(2);
+        return getWeather(geo).then(data => {
             expect(data.name).toBe('Amsterdam')
             expect(data.weather).toMatchObject({
                 temp: 19,
                 unit: 'c',
                 weather: 'rainy'
             });
-            done();
-        }, err => {
-            console.log(err);
-            done.fail();
-        });
+        }).catch(err => console.log(err));
     });
 
-    it('should fetch geo coordinate from api', done => {
-        fetchMock.mock(`https://maps.googleapis.com/maps/api/geocode/json?language=en&address=${address}`, fakeGeo);
-        getGeoLocation(address, data => {
-            expect(data.name).toBe('Amsterdam')
-            expect(data.geo).toMatchObject({
-                latitude: 30,
-                longitude: 40
-            });
-            done();
-        }, err => {
-            console.log(err);
-            done.fail();
-        });
+    it('should fetch search suggestion from api', () => {
+        fetchMock.mock('/api/autocomplete?input=Ap', autocomplete);
+        expect.assertions(1);
+        return getGeoSuggestion('Ap').then(data => {
+            expect(data.results).toEqual(['Apeldoorn', 'Appleton', 'Apopka'])
+        }).catch(err => console.log(err));
+    });
+
+    it('should fetch geolocation from api', () => {
+        fetchMock.mock('/api/geolocation?place_id=some_hash_code_id', fakeGeo);
+        expect.assertions(2);
+        return getGeoLocation('some_hash_code_id').then(data => {
+            expect(data.geo.latitude).toBe(30);
+            expect(data.geo.longitude).toBe(40);
+        }).catch(err => console.log(err));
     });
 });
 

@@ -1220,80 +1220,248 @@ const weatherJson = {
   }
 };
 
-const geoJson = {
-  "results":[
-    {
-      "address_components":[
-        {
-          "long_name":"Los Angeles",
-          "short_name":"Los Angeles",
-          "types":[
-            "locality",
-            "political"
-          ]
-        },
-        {
-          "long_name":"Los Angeles County",
-          "short_name":"Los Angeles County",
-          "types":[
-            "administrative_area_level_2",
-            "political"
-          ]
-        },
-        {
-          "long_name":"California",
-          "short_name":"CA",
-          "types":[
-            "administrative_area_level_1",
-            "political"
-          ]
-        },
-        {
-          "long_name":"United States",
-          "short_name":"US",
-          "types":[
-            "country",
-            "political"
-          ]
-        }
-      ],
-      "formatted_address":"Los Angeles, CA, USA",
-      "geometry":{
-        "bounds":{
-          "northeast":{
-            "lat":34.3373061,
-            "lng":-118.1552891
-          },
-          "southwest":{
-            "lat":33.7036519,
-            "lng":-118.6681759
-          }
-        },
-        "location":{
-          "lat":34.0522342,
-          "lng":-118.2436849
-        },
-        "location_type":"APPROXIMATE",
-        "viewport":{
-          "northeast":{
-            "lat":34.3373061,
-            "lng":-118.1552891
-          },
-          "southwest":{
-            "lat":33.7036519,
-            "lng":-118.6681759
-          }
-        }
+const suggestionJson = {
+   "predictions" : [
+      {
+         "description" : "Los Angeles, CA, United States",
+         "id" : "7f7b7d8118ae8db8ed3f541159ac928c484d12ad",
+         "matched_substrings" : [
+            {
+               "length" : 6,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJE9on3F3HwoAR9AhGJW_fL-I",
+         "reference" : "CkQ2AAAA_72Os-6X2YvKLyw3_IYjl8Fy1gpWzjUoJHs3BCJhbmQNq_rZBBx6KZTb81k5LBwkttqYSaVshIMGSaHYkbP7TRIQH4etKmRwqnYQ6Ssv5JaichoUhu2r3Q4NAQHdN6BksB8170up2_c",
+         "structured_formatting" : {
+            "main_text" : "Los Angeles",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 6,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "CA, United States"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Los Angeles"
+            },
+            {
+               "offset" : 13,
+               "value" : "CA"
+            },
+            {
+               "offset" : 17,
+               "value" : "United States"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
       },
-      "place_id":"ChIJE9on3F3HwoAR9AhGJW_fL-I",
-      "types":[
-        "locality",
-        "political"
-      ]
-    }
-  ],
-  "status":"OK"
-}
+      {
+         "description" : "Los Ángeles, Chile",
+         "id" : "fb4d8f5554e094aa42a56e92ab2b561fa5309211",
+         "matched_substrings" : [
+            {
+               "length" : 6,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJVzZSaUbda5YRdwhonSL2GIM",
+         "reference" : "CjQrAAAA7OX7NfyBqYIdgjermFe8g0kljdzt0RCqgReSehPC-VfwMWHB3K59tWxXlhmCseBIEhCtwC3swdkUeAEU4AnxRbdTGhS1S3338zKxrHXOU36k_iYxXkFt1A",
+         "structured_formatting" : {
+            "main_text" : "Los Ángeles",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 6,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Chile"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Los Ángeles"
+            },
+            {
+               "offset" : 13,
+               "value" : "Chile"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Los Andes, Chile",
+         "id" : "02071544e2af9ed654aeb04b885590eed5315a0c",
+         "matched_substrings" : [
+            {
+               "length" : 6,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJKwvRWHlWfZYRbhwB1kV4MMs",
+         "reference" : "CjQoAAAAaoU5CR53vF99JfuXNrzSrkH7DSuVyuiBhZNqBCPnBzBPAzwKtn7FzH1quuAmsQ0ZEhBcwlrJg5pkZ5nVQrGGpe0rGhSZx5bNyJMxCVrlED_ebzhPuBUNNw",
+         "structured_formatting" : {
+            "main_text" : "Los Andes",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 6,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Chile"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Los Andes"
+            },
+            {
+               "offset" : 11,
+               "value" : "Chile"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Los Antiguos, Santa Cruz Province, Argentina",
+         "id" : "fac00d705637bfa50541908b9f8b9758063fe3a3",
+         "matched_substrings" : [
+            {
+               "length" : 6,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJ1ekZvywq7b0RBLIDE2UKWEw",
+         "reference" : "ClREAAAAU5IRHx0TfojcP1IaTT3h5EofdnTf3w16U0Pj2365Up8xQg7GaO99yA3AYPs8Ulo_SARYjXV1Ccbjy_4XPCC8kRqKS4J2G4OF5zG3P1m533wSEBm4V8YYI-ICgAZKZWIcvtYaFCfmCwXOUP1FomZ6A13OLdbLcWcI",
+         "structured_formatting" : {
+            "main_text" : "Los Antiguos",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 6,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Santa Cruz Province, Argentina"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Los Antiguos"
+            },
+            {
+               "offset" : 14,
+               "value" : "Santa Cruz Province"
+            },
+            {
+               "offset" : 35,
+               "value" : "Argentina"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Os Ancares, Lugo, Spain",
+         "id" : "0570770e559ab2963f7fb3c9ec82761b252367f7",
+         "matched_substrings" : [
+            {
+               "length" : 10,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJi1u9CIb4MA0RRTo1gvug524",
+         "reference" : "CjQvAAAA1Hiuv8LbE3ayw621tnDtRM9NOs3Oh8Eu2JmYVdVx3X1ErePKGja4PPuQfVw6V7m3EhA7_CBV58X9mK0qjiVZdkyWGhTyjUo2YPnP2e1TN_iZ179ytfHl3A",
+         "structured_formatting" : {
+            "main_text" : "Os Ancares",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 10,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Lugo, Spain"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Os Ancares"
+            },
+            {
+               "offset" : 12,
+               "value" : "Lugo"
+            },
+            {
+               "offset" : 18,
+               "value" : "Spain"
+            }
+         ],
+         "types" : [ "administrative_area_level_3", "political", "geocode" ]
+      }
+   ],
+   "status" : "OK"
+};
+
+const geoJson = {
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "Los Angeles",
+               "short_name" : "Los Angeles",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Los Angeles County",
+               "short_name" : "Los Angeles County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "California",
+               "short_name" : "CA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Los Angeles, CA, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 34.3373061,
+                  "lng" : -118.1552891
+               },
+               "southwest" : {
+                  "lat" : 33.7036519,
+                  "lng" : -118.6681759
+               }
+            },
+            "location" : {
+               "lat" : 34.0522342,
+               "lng" : -118.2436849
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 34.3373061,
+                  "lng" : -118.1552891
+               },
+               "southwest" : {
+                  "lat" : 33.7036519,
+                  "lng" : -118.6681759
+               }
+            }
+         },
+         "place_id" : "ChIJE9on3F3HwoAR9AhGJW_fL-I",
+         "types" : [ "locality", "political" ]
+      }
+   ],
+   "status" : "OK"
+};
 
 describe('respones formatter', () => {
 

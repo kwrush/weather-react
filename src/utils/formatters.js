@@ -45,17 +45,38 @@ export const formatWeatherData = (data) => {
     });
 }
 
+export const formatGeoSuggestion = data => {
+    if (data.status !== 'OK') return List();
+
+    const results = data.predictions;
+    return List(results.map(result => Map({
+        id: result.place_id,
+        shortName: result.structured_formatting.main_text,
+        fullName: result.description
+    })));
+}
+
 export const formatGeoLocation = (data) => {
     if (data.status !== 'OK') return List();
 
-    const results = data.results;
-    return List(results.map(result => {
-        return Map({
+    let output = Map({
+        id: undefined,
+        fullName: '',
+        shortName: '',
+        latitude: undefined,
+        longitude: undefined
+    });
+
+    if (data.results.length > 0) {
+        const result = data.results[0];
+        output = output.merge({
             id: result.place_id,
             fullName: result.formatted_address,
             shortName: result.address_components[0].short_name,
             latitude: result.geometry.location.lat,
             longitude: result.geometry.location.lng
         });
-    }));
+    }
+
+    return output;
 }

@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onResultClick: e => {
             const target = e.target;
-            dispatch(addCity(fromJS(JSON.parse(target.dataset.result))));
+            dispatch(addCity(target.dataset.index));
         },
         onKeyUp: e => {
             e.preventDefault();
@@ -35,7 +35,7 @@ const Input = ({ results, onResultClick, onKeyUp }) => {
                 onClick={onResultClick}
             >
                 {results.map((result, index) => (
-                    <li data-result={JSON.stringify(result.toJS())} className="result" key={index}>
+                    <li data-index={index} className="result" key={index}>
                         {result.get('fullName')}
                     </li>
                 ))}
