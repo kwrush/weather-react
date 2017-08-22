@@ -6,7 +6,7 @@ import SkyconsWrap from './SkyconsWrap';
 
 const Daily = ({ daily }) => {
 
-    const forecasts = daily.map((forecast, index) => {
+    const forecasts = daily ? daily.map((forecast, index) => {
         return (
             <li className="flex-item" key={index}>
                 <div className="forecast-date inner-item-box">{forecast.get('day')}</div>
@@ -19,7 +19,7 @@ const Daily = ({ daily }) => {
                 </div>
             </li>
         );
-    });
+    }) : [];
 
     return (
         <section className="outer-item-box">

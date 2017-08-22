@@ -1,7 +1,10 @@
 .city-entity {
     position: relative;
+    margin: 16px;
     padding: 20px 10px;
     width: 380px;
+    min-width: 360px;
+    min-height: 328px;
     text-align: center;
     overflow: hidden;
 
@@ -13,6 +16,13 @@
     &:hover .remove-button {
         opacity: 1
     }
+}
+
+@media (max-width: 360px) {
+    .city-entity {
+        width: 320px;
+        margin: 16px 0;
+    }   
 }
 
 .city-header {

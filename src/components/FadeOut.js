@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
-const Fade = ({ children }) => (
+const FadeOut = ({ children, id }) => (
     <CSSTransition
+        key={id}
         classNames="fadeout"
-        timeout={300}
+        timeout={0}
     >
         {children}
     </CSSTransition>
 )
 
-Fade.propTypes = {
+FadeOut.propTypes = {
     children: PropTypes.element
 }
 
-export default Fade
+export default FadeOut

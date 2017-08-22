@@ -69,8 +69,7 @@ function addCity (
 
 function fetchWeather (
     state = Map({
-        isFetching: false,
-        weather: Map()
+        isFetching: false
     }), 
     action
 ) {
@@ -82,28 +81,6 @@ function fetchWeather (
                 .set('isFetching', false)
                 .merge(action.city);
         case actionTypes.REJECT_FETCH_WEATHER:
-            return state.set('isFetching', false);
-        default:
-            return state;
-    }
-}
-
-function fetchGeoCoordinates (
-    state = Map({
-        isFetching: false,
-        latitude: undefined,
-        longitude: undefined
-    }), 
-    action
-) {
-    switch (action.type) {
-        case actionTypes.REQUEST_FETCH_GEO:
-            return state.set('isFetching', true);
-        case actionTypes.RESOLVE_FETCH_GEO:
-            return state
-                .set('isFetching', false)
-                .merge(action.city);
-        case actionTypes.REJECT_FETCH_GEO:
             return state.set('isFetching', false);
         default:
             return state;
@@ -113,17 +90,18 @@ function fetchGeoCoordinates (
 function cities (state = Map(), action) {
     switch (action.type) {
         case actionTypes.ADD_CITY:
-            return state.set(action.id, action.cityInfo);
+            return (typeof action.id === 'string') ? 
+                state.set(action.id, action.cityInfo) : state;
         case actionTypes.REMOVE_CITY:
             return state.remove(action.id);
-        case actionTypes.REQUEST_FETCH_GEO:
-        case actionTypes.RESOLVE_FETCH_GEO:
-        case actionTypes.REJECT_FETCH_GEO:
-            return state.set(action.id, fetchGeoCoordinates(action.city, action));
         case actionTypes.REQUEST_FETCH_WEATHER:
         case actionTypes.RESOLVE_FETCH_WEATHER:
         case actionTypes.REJECT_FETCH_WEATHER:
-            return state.set(action.id, fetchWeather(action.city, action));
+            const cityState = state.get(action.id);
+            return cityState ? state.set(
+                action.id,
+                cityState.merge(fetchWeather(action.city, action))
+            ) : state;
         default: 
             return state;
     }
