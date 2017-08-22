@@ -18,19 +18,11 @@ var port = 3001;
 // https://developers.google.com/places/web-service/get-api-key
 var API_KEYS = {
     weather: 'f5b73cbcae95178cc4d5baa172504762',
-    geo: 'AIzaSyCTDOL1R6WTflXAU1GxV_2xw9XfLLEGb2Q'
 };
 
 var darkSky = new DarkSky(API_KEYS.weather);
 
-var googleMapsClient = require('@google/maps').createClient({
-    Promise: require('q').Promise,
-    key: API_KEYS.geo
-});
-
-//var DARKSKY_URL   = 'https://api.darksky.net/forecast/' + API_KEYS.weather + '/';
 var AUTO_COMPLETE_URL = 'http://autocomplete.wunderground.com/aq?query=';
-//var GEODECODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json?language=en&key=' + API_KEYS.geo + '&place_id=';
 
 var app = express();
 var server = http.createServer(app);
@@ -55,7 +47,7 @@ app.get('/api/weather', function(req, res) {
                 return res.type('application/json').status(200).json(payload);
             })
             .catch(function(err) {
-                return Promise.reject(err);
+                return Promise.reject(new Error(err));
             })
     } catch (err) {
         // Debug
@@ -93,7 +85,7 @@ app.get('/api/autocomplete', function (req, res) {
                return res.type('application/json').status(200).json(payload);
            })
            .catch(function(err) {
-               return Promise.reject(err);
+               return Promise.reject(new Error(err));
            });
     } catch (err) {
         // Debug
