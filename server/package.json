@@ -1,20 +1,22 @@
 {
   "name": "server-api",
   "version": "0.0.0",
-  "description": "This is API server for fetching data",
+  "description": "This is a simple API proxy server for fetching data",
   "main": "server.js",
   "scripts": {
     "server": "node server.js"
   },
   "keywords": [
     "server",
+    "proxy",
+    "darksky",
+    "weatherunderground",
     "node",
     "api"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google/maps": "^0.4.3",
     "body-parser": "^1.17.2",
     "dark-sky": "^1.1.2",
     "es6-promise": "^4.1.1",

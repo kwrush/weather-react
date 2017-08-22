@@ -29,7 +29,7 @@ var googleMapsClient = require('@google/maps').createClient({
 });
 
 //var DARKSKY_URL   = 'https://api.darksky.net/forecast/' + API_KEYS.weather + '/';
-var AUTO_COMPLETE_URL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?language=en&types=(cities)&key=' + API_KEYS.geo + '&input=';
+var AUTO_COMPLETE_URL = 'http://autocomplete.wunderground.com/aq?query=';
 //var GEODECODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json?language=en&key=' + API_KEYS.geo + '&place_id=';
 
 var app = express();
@@ -43,7 +43,7 @@ app.get('/api/weather', function(req, res) {
         var lat = req.query.latitude;
         var lng = req.query.longitude;
         var exclude = req.query.exclude || 'minutely,hourly,alerts,flags';
-        var units = req.query.units || 'auto';
+        var units = req.query.units || 'si';
 
         darkSky
             .coordinates({lat: lat, lng: lng})
@@ -51,22 +51,12 @@ app.get('/api/weather', function(req, res) {
             .exclude(exclude)
             .units(units)
             .get()
-            .then(function (response) {
-                if (response.status !== 200) {
-                    res.status(response.status).json({
-                        'Message:': 'Fail to fetch data from Dark Sky server'
-                    })
-                }
-
-                return response.json();
-            })
             .then(function (payload) {
-                res.type('application/json').status(200).json(payload);
+                return res.type('application/json').status(200).json(payload);
             })
             .catch(function(err) {
-                throw err;
+                return Promise.reject(err);
             })
-
     } catch (err) {
         // Debug
         if (process.env.NODE_ENV !== 'production') {
@@ -79,6 +69,8 @@ app.get('/api/weather', function(req, res) {
         });
     }
 });
+
+
 
 app.get('/api/autocomplete', function (req, res) {
     try {
@@ -98,10 +90,10 @@ app.get('/api/autocomplete', function (req, res) {
                return response.json();
            })
            .then(function (payload) {
-               res.type('application/json').status(200).json(payload);
+               return res.type('application/json').status(200).json(payload);
            })
            .catch(function(err) {
-               throw err;
+               return Promise.reject(err);
            });
     } catch (err) {
         // Debug
@@ -111,44 +103,6 @@ app.get('/api/autocomplete', function (req, res) {
 
         res.status(500).json({
             'Message': 'Errors occur as requesting geolocation suggestion', 
-            'Error': err 
-        });
-    }
-});
-
-app.get('/api/geolocation', function (req, res) {
-    try {
-       var placeId = req.query.place_id;
-       console.log(placeId);
-       googleMapsClient.reverseGeocode({
-           place_id: placeId,
-           language: 'en',
-       })
-       .asPromise()
-       .then(function(response) {
-            if (response.status !== 200) {
-                res.status(response.status).json({
-                    'Message': 'Fail to fetch geolocation suggestion'
-                })
-            }
-
-            return response.json;
-        })
-        .then(function (payload) {
-            console.log(JSON.stringify(payload));
-            res.type('application/json').status(200).json(payload);
-        })
-        .catch(function(err) {
-            throw err;
-        });
-    } catch (err) {
-        // Debug
-        if (process.env.NODE_ENV !== 'production') {
-            console.error('Errors occur as requesting geolocation data', err);
-        }
-
-        res.status(500).json({
-            'Message': 'Errors occur as requesting geolocation data', 
             'Error': err 
         });
     }
