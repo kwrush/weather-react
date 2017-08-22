@@ -24,6 +24,7 @@ var API_KEYS = {
 var darkSky = new DarkSky(API_KEYS.weather);
 
 var googleMapsClient = require('@google/maps').createClient({
+    Promise: require('q').Promise,
     key: API_KEYS.geo
 });
 
@@ -98,6 +99,9 @@ app.get('/api/autocomplete', function (req, res) {
            })
            .then(function (payload) {
                res.type('application/json').status(200).json(payload);
+           })
+           .catch(function(err) {
+               throw err;
            });
     } catch (err) {
         // Debug
@@ -119,12 +123,24 @@ app.get('/api/geolocation', function (req, res) {
        googleMapsClient.reverseGeocode({
            place_id: placeId,
            language: 'en',
-       }, function(err, response) {
-           if (err) throw err;
-           console.log(response.json());
-           res.type('application/json').status(200).json(response.json());
-       });
+       })
+       .asPromise()
+       .then(function(response) {
+            if (response.status !== 200) {
+                res.status(response.status).json({
+                    'Message': 'Fail to fetch geolocation suggestion'
+                })
+            }
 
+            return response.json;
+        })
+        .then(function (payload) {
+            console.log(JSON.stringify(payload));
+            res.type('application/json').status(200).json(payload);
+        })
+        .catch(function(err) {
+            throw err;
+        });
     } catch (err) {
         // Debug
         if (process.env.NODE_ENV !== 'production') {
