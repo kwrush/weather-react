@@ -50,23 +50,6 @@ function search (
     }
 }
 
-function addCity (
-    state = Map({
-        id: undefined,
-        fullName: '',
-        shortName: '',
-        latitude: undefined,
-        longitude: undefined
-    }), 
-    action
-) {
-    if (action.type === actionTypes.ADD_CITY) {
-        return state.merge(action.cityInfo);
-    } else {
-        return state;
-    }
-}
-
 function fetchWeather (
     state = Map({
         isFetching: false

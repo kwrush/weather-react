@@ -48,15 +48,6 @@
     @include animation(wobble, 0, 7s, linear, infinite);
 }
 
-.fadeout-exit {
-    opacity: 1;
-}
-
-.fadeout-exit.fadeout-exit-active {
-    opacity: 0;
-    transition: opacity 0.6s ease-in;
-}
-
 @media (max-width: 360px) {
     #app {
         width: 320px;

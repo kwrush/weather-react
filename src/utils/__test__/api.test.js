@@ -1,4 +1,4 @@
-import { getWeather, getGeoSuggestion, getGeoLocation } from '../api';
+import { getWeather, getGeoSuggestion } from '../api';
 import fetchMock from 'fetch-mock';
 
 const geo = {
@@ -18,18 +18,6 @@ describe('fetch weather and geo location', () => {
                 unit: 'c',
                 weather: 'rainy'
             }
-        },
-        status: 200,
-        header: {'Content-Type': 'application/json'}
-    };
-
-    const fakeGeo = {
-        body: {
-            geo: {
-                latitude: 30,
-                longitude: 40
-            },
-            name: 'Amsterdam'
         },
         status: 200,
         header: {'Content-Type': 'application/json'}
@@ -65,15 +53,6 @@ describe('fetch weather and geo location', () => {
         expect.assertions(1);
         return getGeoSuggestion('Ap').then(data => {
             expect(data.results).toEqual(['Apeldoorn', 'Appleton', 'Apopka'])
-        }).catch(err => console.log(err));
-    });
-
-    it('should fetch geolocation from api', () => {
-        fetchMock.mock('/api/geolocation?place_id=some_hash_code_id', fakeGeo);
-        expect.assertions(2);
-        return getGeoLocation('some_hash_code_id').then(data => {
-            expect(data.geo.latitude).toBe(30);
-            expect(data.geo.longitude).toBe(40);
         }).catch(err => console.log(err));
     });
 });

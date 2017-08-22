@@ -1,7 +1,7 @@
-import { Map } from 'immutable';
 import actionTypes from './actionTypes';
-import { getWeather, getGeoSuggestion, getGeoLocation } from '../utils/api';
-import { formatWeatherData, formatGeoSuggestion, formatGeoLocation } from '../utils/formatters';
+import { getWeather, getGeoSuggestion } from '../utils/api';
+import { formatWeatherData, formatGeoSuggestion } from '../utils/formatters';
+import { shouldPerformSearch, shouldUpdateWeather } from '../utils/helpers';
 
 export const requestWeather = id => {
     return {
@@ -62,21 +62,19 @@ export const fetchWeather = id => {
 
             if (typeof geoCoordinates.latitude === 'undefined' || 
                 typeof geoCoordinates.longitude === 'undefined') {
-                return;
+                throw new Error('ERROR:Unknown location.');
             } 
 
             dispatch(requestWeather(id));
             return getWeather(geoCoordinates)
                 .then(data => {
                     const formattedData = cityEntity.merge(formatWeatherData(data));
-                    dispatch(requestWeatherSuccess(formattedData));
+                    return dispatch(requestWeatherSuccess(formattedData));
                 }) 
-                .catch(error => {
-                    dispatch(requestWeatherFail({
-                        id: id, 
-                        error: error
-                    }));
-                });  
+                .catch(error => dispatch(requestWeatherFail({
+                    id: id, 
+                    error: error
+                })));  
         }
     };
 }
@@ -84,29 +82,40 @@ export const fetchWeather = id => {
 export const performSearch = (query) => {
     return (dispatch, getState) => {
         dispatch(requestSearch(query));
-        getGeoSuggestion(
+        return getGeoSuggestion(
             getState().getIn(['searchEntities', 'searchQuery'])
         )
         .then(results => {
             const formattedResults = formatGeoSuggestion(results);
-            dispatch(requestSearchSuccess(formattedResults));
+            return dispatch(requestSearchSuccess(formattedResults));
         })
         .catch(error => dispatch(requestSearchFail(error)));
     }
 }
 
-// Don't do searching if query is too short
-function shouldPerformSearch (searchQuery) {
-    return searchQuery.trim().length > 1;
-}
-
 export function performSearchIfNeeded (query) {
-    return (dispatch) => {
+    return dispatch => {
         if (shouldPerformSearch(query)) {
             return dispatch(performSearch(query));
         }
     };
 } 
+
+export function fetchWeatherIfNeeded (id) {
+    return (dispatch, getState) => {
+        const cityEntity = getState().getIn(['cities', id]);
+        if (cityEntity) {
+            const updatedAt = cityEntity.getIn(['weather', 'updatedAt']);
+            if (typeof updatedAt === 'number') {
+                const currentTime = Date.now() / 1000;
+                if (shouldUpdateWeather(updatedAt, currentTime)) 
+                   return dispatch(fetchWeather(id));
+            } else {
+                return dispatch(fetchWeather(id));
+            }
+        } 
+    };
+}
 
 export const selectToAddCity = cityInfo => {
     return {
@@ -120,7 +129,7 @@ export const addCity = index => {
     return (dispatch, getState) => {
         const result = getState().getIn(['searchEntities', 'results', index]);
         dispatch(selectToAddCity(result));
-        dispatch(fetchWeather(result.get('id')));
+        return dispatch(fetchWeatherIfNeeded(result.get('id')));
     }
 }
 

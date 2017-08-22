@@ -53,8 +53,3 @@ export const getWeather = async (geoInfo = {}) => {
 export const getGeoSuggestion = async (searchQuery = '') => {
     return await callApi(`/api/autocomplete?input=${searchQuery}`, null);
 }
-
-export const getGeoLocation = async (placeId = '') => {
-    console.log(placeId);
-    return await callApi(`/api/geolocation?place_id=${placeId}`, null);
-}

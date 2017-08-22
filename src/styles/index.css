@@ -561,13 +561,6 @@ ol {
   animation-timing-function: linear;
   animation-iteration-count: infinite; }
 
-.fadeout-exit {
-  opacity: 1; }
-
-.fadeout-exit.fadeout-exit-active {
-  opacity: 0;
-  transition: opacity 0.6s ease-in; }
-
 @media (max-width: 360px) {
   #app {
     width: 320px;
@@ -575,6 +568,17 @@ ol {
 
 #app {
   min-width: 360px; }
+
+.fadeout-enter,
+.fadeout-enter.fadeout-enter-active {
+  opacity: 1; }
+
+.fadeout-exit {
+  opacity: 1; }
+
+.fadeout-exit.fadeout-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-in; }
 
 .ctrl-buttons {
   position: absolute;
@@ -692,23 +696,23 @@ ol {
   height: 28px; }
 
 .search-icon {
-  right: 184px;
+  right: 204px;
   width: 28px;
-  opacity: 0.3;
+  display: block;
+  opacity: 0.5;
   z-index: 999; }
   .search-icon > svg {
     position: absolute;
-    left: 50%;
     top: 50%;
-    -ms-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); }
+    left: 50%;
+    transform: translate(-50%, -50%);
+    fill: #777; }
 
 .search-input {
   position: absolute;
   top: 6px;
   right: 12px;
-  width: 200px;
+  width: 220px;
   padding-left: 30px;
   padding-right: 6px;
   border: none;
@@ -716,27 +720,31 @@ ol {
   border-radius: 3px;
   font-size: 0.9em;
   z-index: 100; }
+  .search-input:focus ~ .search-icon {
+    opacity: 1; }
 
 .results {
   position: absolute;
   top: 36px;
   right: 2px;
-  width: 210px;
+  width: 230px;
   max-height: 260px;
-  padding: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: none;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
   overflow: auto;
   border-radius: 3px;
   background: white;
   z-index: 10; }
   .results .result {
-    padding: 4px 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 12px;
     cursor: pointer;
-    color: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    color: #777; }
     .results .result:hover {
-      color: black; }
+      background: rgba(0, 0, 0, 0.3);
+      color: white; }
 
 .cities-container {
   margin-top: 40px;

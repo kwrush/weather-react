@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { performSearchIfNeeded, addCity } from '../store/actions';
-import store from '../store/store';
 import Ionicon from 'react-ionicons';
-import {fromJS} from 'immutable';
 
 const mapStateToProps = state => {
     return {
@@ -40,9 +38,9 @@ const Input = ({ results, onResultClick, onSearch }) => {
                         onSearch(e.target.value);
                     }} 
                 />
-                <div className="search-icon">
+                <a className="search-icon">
                     <Ionicon icon="ion-search" fontSize="20px" />
-                </div>
+                </a>
             </form>
             <ul 
                 className="results" 

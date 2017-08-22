@@ -5,7 +5,7 @@ import { Map, List } from 'immutable';
 import { getWeekday, getShortDate } from './timeUtils';
 
 function iconFormatter(iconString) {
-    return iconString.replace(/\-/g, '_').toUpperCase();
+    return iconString.replace(/-/g, '_').toUpperCase();
 }
 
 export const formatWeatherData = (data) => {
@@ -25,9 +25,10 @@ export const formatWeatherData = (data) => {
     }
 
     return Map({
-        latitude: data.latitude,
-        longitude: data.longitude,
+        latitude: '' + data.latitude,
+        longitude: '' + data.longitude,
         weather: Map({
+            // time returned from Dark Sky is in seconds
             updatedAt: data.currently.time,
             timezone: data.timezone,
             currently: Map({

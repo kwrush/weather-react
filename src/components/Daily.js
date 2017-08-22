@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import Ionicon from 'react-ionicons';
 import SkyconsWrap from './SkyconsWrap';
 
 const Daily = ({ daily }) => {
