@@ -40,7 +40,7 @@ describe('actions test', () => {
                 expect(store.getActions()[1]).toMatchObject({
                     type: actionTypes.RESOLVE_SEARCH_CITY
                 });
-            })
+            });
     });
 
     it('[click on result] should add selected city and then fetch the weather', () => {

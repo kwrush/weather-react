@@ -4,14 +4,14 @@ import { getWeather, getGeoSuggestion } from '../utils/api';
 import { formatWeatherData, formatGeoSuggestion } from '../utils/formatters';
 import { shouldPerformSearch, shouldUpdateWeather } from '../utils/helpers';
 
-const requestWeather = id => {
+export const requestWeather = id => {
     return {
         type: actionTypes.REQUEST_FETCH_WEATHER,
         id
     };
 }
 
-const requestWeatherSuccess = data => {
+export const requestWeatherSuccess = data => {
     return {
         type: actionTypes.RESOLVE_FETCH_WEATHER,
         id: data.get('id'),
@@ -19,7 +19,7 @@ const requestWeatherSuccess = data => {
     };
 }
 
-const requestWeatherFail = error => {
+export const requestWeatherFail = error => {
     return {
         type: actionTypes.REJECT_FETCH_WEATHER,
         id: error.id,
@@ -27,7 +27,7 @@ const requestWeatherFail = error => {
     };
 }
 
-const requestSearch = query => {
+export const requestSearch = query => {
     return {
         meta: {
             debounce: 'requestInterval'
@@ -37,14 +37,14 @@ const requestSearch = query => {
     };
 }
 
-const requestSearchSuccess = results => {
+export const requestSearchSuccess = results => {
     return {
         type: actionTypes.RESOLVE_SEARCH_CITY,
         results
     };
 }
 
-const requestSearchFail = error => {
+export const requestSearchFail = error => {
     return {
         type: actionTypes.REJECT_SEARCH_CITY,
         error
