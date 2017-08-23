@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import { DAILY } from '../types';
 import SkyconsWrap from './SkyconsWrap';
 
 const Daily = ({ daily }) => {
@@ -30,26 +29,7 @@ const Daily = ({ daily }) => {
 }
 
 Daily.propTypes = {
-    daily: ImmutablePropTypes.listOf(
-        ImmutablePropTypes.contains({
-            precipProbability: PropTypes.number.isRequired,
-            temperatureMin: PropTypes.string.isRequired,
-            temperatureMax: PropTypes.string.isRequired,
-            icon: PropTypes.oneOf([
-                'CLEAR_DAY',
-                'CLEAR_NIGHT',
-                'PARTLY_CLOUDY_DAY',
-                'PARTLY_CLOUDY_NIGHT',
-                'CLOUDY',
-                'RAIN',
-                'SLEET',
-                'SNOW',
-                'WIND',
-                'FOG'
-            ]),
-            day: PropTypes.string.isRequired
-        })
-    )
+    daily: DAILY
 };
 
 export default Daily;

@@ -1,12 +1,12 @@
 import React from 'react';
-import SearchInput from '../containers/SearchInput';
-import CityList from '../containers/CityList';
+import SearchContainer from '../containers/SearchContainer';
+import CitiesContainer from '../containers/CitiesContainer';
 
 const App = (props) => {
     return (
         <div id="app">
-            <SearchInput />
-            <CityList />
+            <SearchContainer />
+            <CitiesContainer />
         </div>
     );
 }

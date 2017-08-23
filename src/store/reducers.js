@@ -16,6 +16,7 @@ function searchEntities (
         case actionTypes.REJECT_SEARCH_CITY:
             return state.merge(search(state, action));
         case actionTypes.FORMAT_RESULTS:
+        case actionTypes.CLEAR_SEARCH_RESULTS:
             return state.set('results', action.results);
         default:
             return state;

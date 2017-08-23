@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import { CURRENTLY } from '../types';
 import Ionicon from 'react-ionicons';
 import SkyconsWrap from './SkyconsWrap';
 
@@ -40,25 +39,7 @@ const Currently = ({ current }) => (
 );
 
 Currently.propTypes = {
-    current: ImmutablePropTypes.contains({
-        precipProbability: PropTypes.string.isRequired,
-        windSpeed: PropTypes.string.isRequired,
-        windDirection: PropTypes.number.isRequired,
-        temperature: PropTypes.string.isRequired,
-        icon: PropTypes.oneOf([
-            'CLEAR_DAY',
-            'CLEAR_NIGHT',
-            'PARTLY_CLOUDY_DAY',
-            'PARTLY_CLOUDY_NIGHT',
-            'CLOUDY',
-            'RAIN',
-            'SLEET',
-            'SNOW',
-            'WIND',
-            'FOG'
-        ]),
-        summary: PropTypes.string.isRequired
-    })
+    current: CURRENTLY
 };
 
 

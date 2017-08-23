@@ -1,16 +1,17 @@
+import { List } from 'immutable';
 import actionTypes from './actionTypes';
 import { getWeather, getGeoSuggestion } from '../utils/api';
 import { formatWeatherData, formatGeoSuggestion } from '../utils/formatters';
 import { shouldPerformSearch, shouldUpdateWeather } from '../utils/helpers';
 
-export const requestWeather = id => {
+const requestWeather = id => {
     return {
         type: actionTypes.REQUEST_FETCH_WEATHER,
         id
     };
 }
 
-export const requestWeatherSuccess = data => {
+const requestWeatherSuccess = data => {
     return {
         type: actionTypes.RESOLVE_FETCH_WEATHER,
         id: data.get('id'),
@@ -18,7 +19,7 @@ export const requestWeatherSuccess = data => {
     };
 }
 
-export const requestWeatherFail = error => {
+const requestWeatherFail = error => {
     return {
         type: actionTypes.REJECT_FETCH_WEATHER,
         id: error.id,
@@ -26,7 +27,7 @@ export const requestWeatherFail = error => {
     };
 }
 
-export const requestSearch = query => {
+const requestSearch = query => {
     return {
         meta: {
             debounce: 'requestInterval'
@@ -36,21 +37,21 @@ export const requestSearch = query => {
     };
 }
 
-export const requestSearchSuccess = results => {
+const requestSearchSuccess = results => {
     return {
         type: actionTypes.RESOLVE_SEARCH_CITY,
         results
     };
 }
 
-export const requestSearchFail = error => {
+const requestSearchFail = error => {
     return {
         type: actionTypes.REJECT_SEARCH_CITY,
         error
     };
 }
 
-export const fetchWeather = id => {
+const fetchWeather = id => {
     return (dispatch, getState) => {
         const cityEntity = getState().getIn(['cities', id]);
 
@@ -79,7 +80,15 @@ export const fetchWeather = id => {
     };
 }
 
-export const performSearch = (query) => {
+const selectToAddCity = cityInfo => {
+    return {
+        type: actionTypes.ADD_CITY,
+        id: cityInfo.get('id'),
+        cityInfo
+    };
+}
+
+const performSearch = (query) => {
     return (dispatch, getState) => {
         dispatch(requestSearch(query));
         return getGeoSuggestion(
@@ -93,10 +102,19 @@ export const performSearch = (query) => {
     }
 }
 
+export const clearSearchResults = () => ({
+    type: actionTypes.CLEAR_SEARCH_RESULTS,
+    results: List()
+});
+
 export function performSearchIfNeeded (query) {
+    const q = query.trim();
     return dispatch => {
-        if (shouldPerformSearch(query)) {
-            return dispatch(performSearch(query));
+        if (shouldPerformSearch(q)) {
+            return dispatch(performSearch(q));
+        } else {
+            // just updating searchQuery 
+            dispatch(requestSearch(q));
         }
     };
 } 
@@ -117,19 +135,16 @@ export function fetchWeatherIfNeeded (id) {
     };
 }
 
-export const selectToAddCity = cityInfo => {
-    return {
-        type: actionTypes.ADD_CITY,
-        id: cityInfo.get('id'),
-        cityInfo
-    };
-}
-
 export const addCity = index => {
     return (dispatch, getState) => {
         const result = getState().getIn(['searchEntities', 'results', index]);
         dispatch(selectToAddCity(result));
-        return dispatch(fetchWeatherIfNeeded(result.get('id')));
+        const id = result.get('id');
+        // If the city has been added, clear search results
+        if (getState().getIn(['cities', id])) {
+            dispatch(clearSearchResults())
+        }
+        return dispatch(fetchWeatherIfNeeded(id));
     }
 }
 

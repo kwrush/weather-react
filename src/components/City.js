@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import { CITY } from '../types';
 import Currently from './Currently';
 import Daily from './Daily';
 import { UpdateButton, RemoveButton } from './Buttons';
@@ -24,37 +24,9 @@ const City = ({ cityEntity, onUpdateClick, onRemoveClick }) => {
 };
 
  City.propTypes = {
-    cityEntity: ImmutablePropTypes.contains({
-        id: PropTypes.string.isRequired,
-        shortName: PropTypes.string.isRequired,
-        fullName: PropTypes.string,
-        latitude: PropTypes.string,
-        longitude: PropTypes.string,
-        weather: ImmutablePropTypes.contains({
-            updatedAt: PropTypes.number.isRequired,
-            timezone: PropTypes.string.isRequired,
-            currently: ImmutablePropTypes.contains({
-                precipProbability: PropTypes.string.isRequired,
-                windSpeed: PropTypes.string.isRequired,
-                windDirection: PropTypes.number.isRequired,
-                date: PropTypes.string.isRequired,
-                temperature: PropTypes.string.isRequired,
-                icon: PropTypes.string.isRequired,
-                summary: PropTypes.string.isRequired
-            }).isRequired,
-            daily: ImmutablePropTypes.listOf(
-                ImmutablePropTypes.contains({
-                    precipProbability: PropTypes.number.isRequired,
-                    temperatureMin: PropTypes.string.isRequired,
-                    temperatureMax: PropTypes.string.isRequired,
-                    icon: PropTypes.string.isRequired,
-                    day: PropTypes.string.isRequired
-                })
-            ).isRequired
-        })
-    }).isRequired,
+    cityEntity: CITY.isRequired,
     onUpdateClick: PropTypes.func.isRequired,
     onRemoveClick: PropTypes.func.isRequired
 }; 
 
-export default City;
+export default City

@@ -580,6 +580,76 @@ ol {
   opacity: 0;
   transition: opacity 0.3s ease-in; }
 
+.search-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: #777;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999; }
+  .search-bar > form {
+    line-height: 40px;
+    height: inherit; }
+
+.search-icon,
+.search-input {
+  position: absolute;
+  top: 6px;
+  height: 28px; }
+
+.search-icon {
+  right: 204px;
+  width: 28px;
+  display: block;
+  opacity: 0.5;
+  z-index: 999; }
+  .search-icon > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    fill: #777; }
+
+.search-input {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  width: 220px;
+  padding-left: 30px;
+  padding-right: 6px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  font-size: 0.9em;
+  z-index: 100; }
+  .search-input:focus ~ .search-icon {
+    opacity: 1; }
+
+.results {
+  position: absolute;
+  top: 36px;
+  right: 2px;
+  width: 230px;
+  max-height: 260px;
+  border: none;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+  border-radius: 3px;
+  background: white;
+  z-index: 10; }
+  .results .result {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 12px;
+    cursor: pointer;
+    color: #777; }
+    .results .result:hover {
+      background: rgba(0, 0, 0, 0.3);
+      color: white; }
+
 .ctrl-buttons {
   position: absolute;
   top: 0;
@@ -675,76 +745,6 @@ ol {
 
 .forecast-temp-minmax .temp-min {
   opacity: 0.7; }
-
-.search-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: #777;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  z-index: 9999; }
-  .search-bar > form {
-    line-height: 40px;
-    height: inherit; }
-
-.search-icon,
-.search-input {
-  position: absolute;
-  top: 6px;
-  height: 28px; }
-
-.search-icon {
-  right: 204px;
-  width: 28px;
-  display: block;
-  opacity: 0.5;
-  z-index: 999; }
-  .search-icon > svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    fill: #777; }
-
-.search-input {
-  position: absolute;
-  top: 6px;
-  right: 12px;
-  width: 220px;
-  padding-left: 30px;
-  padding-right: 6px;
-  border: none;
-  outline: none;
-  border-radius: 3px;
-  font-size: 0.9em;
-  z-index: 100; }
-  .search-input:focus ~ .search-icon {
-    opacity: 1; }
-
-.results {
-  position: absolute;
-  top: 36px;
-  right: 2px;
-  width: 230px;
-  max-height: 260px;
-  border: none;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
-  overflow: auto;
-  border-radius: 3px;
-  background: white;
-  z-index: 10; }
-  .results .result {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding: 12px;
-    cursor: pointer;
-    color: #777; }
-    .results .result:hover {
-      background: rgba(0, 0, 0, 0.3);
-      color: white; }
 
 .cities-container {
   margin-top: 40px;

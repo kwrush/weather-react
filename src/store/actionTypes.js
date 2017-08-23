@@ -9,6 +9,7 @@ const actionTypes = [
     'REJECT_FETCH_WEATHER',
     'ADD_CITY',
     'REMOVE_CITY',
+    'CLEAR_SEARCH_RESULTS'
 ];
 
 export default generateActions(actionTypes);
