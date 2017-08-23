@@ -591,7 +591,8 @@ ol {
   z-index: 9999; }
   .search-bar > form {
     line-height: 40px;
-    height: inherit; }
+    height: inherit;
+    display: inline-block; }
 
 .search-icon,
 .search-input {
