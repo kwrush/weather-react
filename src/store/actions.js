@@ -80,7 +80,7 @@ const fetchWeather = id => {
     };
 }
 
-const selectToAddCity = cityInfo => {
+export const selectToAddCity = cityInfo => {
     return {
         type: actionTypes.ADD_CITY,
         id: cityInfo.get('id'),
@@ -138,11 +138,12 @@ export function fetchWeatherIfNeeded (id) {
 export const addCity = index => {
     return (dispatch, getState) => {
         const result = getState().getIn(['searchEntities', 'results', index]);
-        dispatch(selectToAddCity(result));
         const id = result.get('id');
         // If the city has been added, clear search results
         if (getState().getIn(['cities', id])) {
             dispatch(clearSearchResults())
+        } else {
+            dispatch(selectToAddCity(result));
         }
         return dispatch(fetchWeatherIfNeeded(id));
     }

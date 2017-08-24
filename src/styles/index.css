@@ -465,6 +465,48 @@ th {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); } }
 
+@-webkit-keyframes zoom {
+  0% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-moz-keyframes zoom {
+  0% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes zoom {
+  0% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
 *,
 html,
 body {
@@ -753,3 +795,91 @@ ol {
 .cities-container {
   margin-top: 40px;
   flex-wrap: wrap !important; }
+
+.loading {
+  margin: 50px auto;
+  text-align: center;
+  font-size: 1.2em; }
+
+.loading-spots {
+  margin: 0 auto;
+  height: 22px;
+  line-height: 22px;
+  display: inline-block; }
+  .loading-spots .spot {
+    float: left;
+    margin: 8px;
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 100%; }
+  .loading-spots .spot:first-child {
+    -webkit-animation-name: zoom;
+    -webkit-animation-delay: 0;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: zoom;
+    animation-delay: 0;
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+  .loading-spots .spot:nth-child(2) {
+    -webkit-animation-name: zoom;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: zoom;
+    animation-delay: 0.6s;
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+  .loading-spots .spot:nth-child(3) {
+    -webkit-animation-name: zoom;
+    -webkit-animation-delay: 0;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: zoom;
+    animation-delay: 0;
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+  .loading-spots .spot:nth-child(4) {
+    -webkit-animation-name: zoom;
+    -webkit-animation-delay: 0.6s;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: zoom;
+    animation-delay: 0.6s;
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+  .loading-spots .spot:last-child {
+    -webkit-animation-name: zoom;
+    -webkit-animation-delay: 0;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: zoom;
+    animation-delay: 0;
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }

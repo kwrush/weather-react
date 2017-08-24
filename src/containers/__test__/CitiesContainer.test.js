@@ -25,8 +25,8 @@ describe('Cities Container', () => {
                     fullName: 'Paris, BL',
                 })
             }),
-            onUpdateClick: jest.fn(),
-            onRemoveClick: jest.fn()
+            onUpdateClick: () => {},
+            onRemoveClick: () => {}
         };
     });
 
