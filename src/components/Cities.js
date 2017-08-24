@@ -6,12 +6,11 @@ import FadeOut from './FadeOut';
 import City from './City';
 
 const Cities = ({ cities, onUpdateClick, onRemoveClick }) => {
-
     const cityEntities = cities
         .valueSeq()
         .toArray()
+        // put the latest entry at the first place
         .reverse()
-        .filter(city => typeof city.get('id') === 'string')
         .map(city => (
             <FadeOut key={city.get('id')}>
                 <City

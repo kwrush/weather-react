@@ -21,6 +21,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     };
 }
 
-const SearchContainer = connect(mapStateToProps, mapDispatchToProps)(Search);
+export const SearchContainer = Search;
 
-export default SearchContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

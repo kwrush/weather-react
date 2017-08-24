@@ -20,6 +20,6 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const CitiesContainer = connect(mapStateToProps, mapDispatchToProps)(Cities);
+export const CitiesContainer = Cities;
 
-export default CitiesContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Cities)

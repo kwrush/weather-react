@@ -55,11 +55,13 @@ export default class Search extends React.Component {
         return (
             <div className="search-bar">
                 <form 
+                    className="search"
                     onSubmit={this.handleOnSubmit}
                     onClick={this.handleOnInputClick}
                 >
                     <input
                         type="text"
+                        placeholder="Enter a city"
                         className="search-input"
                         onKeyUp={this.handleOnKeyUp}
                     />
