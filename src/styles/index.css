@@ -465,47 +465,47 @@ th {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); } }
 
-@-webkit-keyframes zoom {
-  0% {
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);
-    transform: scale(1); }
-  50% {
-    -ms-transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5); }
+@-webkit-keyframes bounced {
+  0%,
+  80%,
   100% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0; }
+  40% {
     -ms-transform: scale(1);
     -webkit-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1);
+    opacity: 1; } }
 
-@-moz-keyframes zoom {
-  0% {
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);
-    transform: scale(1); }
-  50% {
-    -ms-transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5); }
+@-moz-keyframes bounced {
+  0%,
+  80%,
   100% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0; }
+  40% {
     -ms-transform: scale(1);
     -webkit-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1);
+    opacity: 1; } }
 
-@keyframes zoom {
-  0% {
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);
-    transform: scale(1); }
-  50% {
-    -ms-transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5); }
+@keyframes bounced {
+  0%,
+  80%,
   100% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0; }
+  40% {
     -ms-transform: scale(1);
     -webkit-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1);
+    opacity: 1; } }
 
 *,
 html,
@@ -603,13 +603,8 @@ ol {
   animation-timing-function: linear;
   animation-iteration-count: infinite; }
 
-@media (max-width: 360px) {
-  #app {
-    width: 320px;
-    min-width: 320px; } }
-
 #app {
-  min-width: 360px; }
+  width: 100%; }
 
 .fadeout-enter,
 .fadeout-enter.fadeout-enter-active {
@@ -631,6 +626,10 @@ ol {
   background: #777;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   z-index: 9999; }
+
+@media (max-width: 360px) {
+  .search-bar {
+    min-width: 320px; } }
 
 .search {
   position: absolute;
@@ -743,8 +742,13 @@ ol {
 
 @media (max-width: 360px) {
   .city-entity {
-    width: 320px;
+    width: 100%;
+    min-width: 320px;
     margin: 16px 0; } }
+
+@media (max-width: 320px) {
+  .city-entity {
+    padding: 20px 0; } }
 
 .city-header {
   text-transform: uppercase; }
@@ -797,7 +801,7 @@ ol {
   flex-wrap: wrap !important; }
 
 .loading {
-  margin: 50px auto;
+  margin: 30px auto;
   text-align: center;
   font-size: 1.2em; }
 
@@ -809,77 +813,77 @@ ol {
   .loading-spots .spot {
     float: left;
     margin: 8px;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 100%; }
   .loading-spots .spot:first-child {
-    -webkit-animation-name: zoom;
-    -webkit-animation-delay: 0;
-    -webkit-animation-duration: 1.2s;
+    -webkit-animation-name: bounced;
+    -webkit-animation-delay: -1s;
+    -webkit-animation-duration: 1.7s;
     -webkit-animation-fill-mode: forwards;
-    -webkit-animation-timing-function: linear;
+    -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-iteration-count: infinite;
-    animation-name: zoom;
-    animation-delay: 0;
-    animation-duration: 1.2s;
+    animation-name: bounced;
+    animation-delay: -1s;
+    animation-duration: 1.7s;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
   .loading-spots .spot:nth-child(2) {
-    -webkit-animation-name: zoom;
-    -webkit-animation-delay: 0.6s;
-    -webkit-animation-duration: 1.2s;
+    -webkit-animation-name: bounced;
+    -webkit-animation-delay: -0.8s;
+    -webkit-animation-duration: 1.7s;
     -webkit-animation-fill-mode: forwards;
-    -webkit-animation-timing-function: linear;
+    -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-iteration-count: infinite;
-    animation-name: zoom;
-    animation-delay: 0.6s;
-    animation-duration: 1.2s;
+    animation-name: bounced;
+    animation-delay: -0.8s;
+    animation-duration: 1.7s;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
   .loading-spots .spot:nth-child(3) {
-    -webkit-animation-name: zoom;
-    -webkit-animation-delay: 0;
-    -webkit-animation-duration: 1.2s;
+    -webkit-animation-name: bounced;
+    -webkit-animation-delay: -0.6s;
+    -webkit-animation-duration: 1.7s;
     -webkit-animation-fill-mode: forwards;
-    -webkit-animation-timing-function: linear;
+    -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-iteration-count: infinite;
-    animation-name: zoom;
-    animation-delay: 0;
-    animation-duration: 1.2s;
+    animation-name: bounced;
+    animation-delay: -0.6s;
+    animation-duration: 1.7s;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
   .loading-spots .spot:nth-child(4) {
-    -webkit-animation-name: zoom;
-    -webkit-animation-delay: 0.6s;
-    -webkit-animation-duration: 1.2s;
+    -webkit-animation-name: bounced;
+    -webkit-animation-delay: -0.4s;
+    -webkit-animation-duration: 1.7s;
     -webkit-animation-fill-mode: forwards;
-    -webkit-animation-timing-function: linear;
+    -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-iteration-count: infinite;
-    animation-name: zoom;
-    animation-delay: 0.6s;
-    animation-duration: 1.2s;
+    animation-name: bounced;
+    animation-delay: -0.4s;
+    animation-duration: 1.7s;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }
   .loading-spots .spot:last-child {
-    -webkit-animation-name: zoom;
-    -webkit-animation-delay: 0;
-    -webkit-animation-duration: 1.2s;
+    -webkit-animation-name: bounced;
+    -webkit-animation-delay: -0.2s;
+    -webkit-animation-duration: 1.7s;
     -webkit-animation-fill-mode: forwards;
-    -webkit-animation-timing-function: linear;
+    -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-iteration-count: infinite;
-    animation-name: zoom;
-    animation-delay: 0;
-    animation-duration: 1.2s;
+    animation-name: bounced;
+    animation-delay: -0.2s;
+    animation-duration: 1.7s;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; }

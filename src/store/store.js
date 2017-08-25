@@ -4,7 +4,7 @@ import createDebounce from 'redux-debounce';
 import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers';
-import { Map, List } from 'immutable';
+import { Map, List, OrderedMap } from 'immutable';
 
 // Set minimal time interval between search requests
 const debounceMiddleware = createDebounce({
@@ -37,7 +37,7 @@ const initialState = Map({
         searchQuery: '',
         results: List()
     }),
-    cities: Map()
+    cities: OrderedMap()
 });
 
 

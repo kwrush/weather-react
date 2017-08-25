@@ -35,17 +35,16 @@ $primary-color: #fff;
     }
 }
 
-@include keyframes(zoom) {
-    0% {
-        @include scale(1);
-    }
-
-    50% {
-        @include scale(1.5);
-    }
-
+@include keyframes(bounced) {
+    0%,
+    80%,
     100% {
+        @include scale(0);
+        opacity: 0;
+    }
+    40% {
         @include scale(1);
+        opacity: 1;
     }
 }
 

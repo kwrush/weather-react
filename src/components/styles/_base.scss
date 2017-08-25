@@ -48,13 +48,6 @@
     @include animation(wobble, 0, 7s, linear, infinite);
 }
 
-@media (max-width: 360px) {
-    #app {
-        width: 320px;
-        min-width: 320px;
-    }   
-}
-
 #app {
-    min-width: 360px;
+    width: 100%;
 }

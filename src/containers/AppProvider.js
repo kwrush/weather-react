@@ -17,16 +17,17 @@ export default class AppProvider extends React.Component {
 
     componentWillMount() {
         persistStore(store, persistConfig, () => {
-            this.setState({
+            // display loading animation a bit longer
+            setTimeout(() => {this.setState({
                 rehydrated: true
-            }, () => { this.onRehydratedComplete() });
+            }, () => { this.onRehydratedComplete() })}, 1500);
         });
     }
 
     onRehydratedComplete = () => {
         if (!store.getState().get('cities').isEmpty()) {
-            store.getState().get('cities')
-                .valueSeq().toArray().map(city => {
+            store.getState()
+                .get('cities').toArray().map(city => {
                     return store.dispatch(fetchWeatherIfNeeded(city.get('id')));
                 });
         }

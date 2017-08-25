@@ -20,8 +20,15 @@
 
 @media (max-width: 360px) {
     .city-entity {
-        width: 320px;
+        width: 100%;
+        min-width: 320px;
         margin: 16px 0;
+    }   
+}
+
+@media (max-width: 320px) {
+    .city-entity {
+       padding: 20px 0;
     }   
 }
 

@@ -7,10 +7,9 @@ import City from './City';
 
 const Cities = ({ cities, onUpdateClick, onRemoveClick }) => {
     const cityEntities = cities
-        .valueSeq()
-        .toArray()
         // put the latest entry at the first place
         .reverse()
+        .toArray()
         .map(city => (
             <FadeOut key={city.get('id')}>
                 <City

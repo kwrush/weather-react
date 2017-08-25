@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
 import actionTypes from './actionTypes';
-import { List, Map } from 'immutable';
+import { List, Map, OrderedMap } from 'immutable';
 
 function searchEntities (
     state = Map({
@@ -71,7 +71,7 @@ function fetchWeather (
     }
 }
 
-function cities (state = Map(), action) {
+function cities (state = OrderedMap(), action) {
     switch (action.type) {
         case actionTypes.ADD_CITY:
             return (typeof action.id === 'string') ? 

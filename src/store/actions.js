@@ -139,11 +139,12 @@ export const addCity = index => {
     return (dispatch, getState) => {
         const result = getState().getIn(['searchEntities', 'results', index]);
         const id = result.get('id');
-        // If the city has been added, clear search results
+        // If the city has been added, only clear search results
         if (getState().getIn(['cities', id])) {
             dispatch(clearSearchResults())
         } else {
             dispatch(selectToAddCity(result));
+            dispatch(clearSearchResults())
         }
         return dispatch(fetchWeatherIfNeeded(id));
     }

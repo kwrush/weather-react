@@ -1,5 +1,5 @@
 .loading {
-    margin: 50px auto;
+    margin: 30px auto;
     text-align: center;
     font-size: 1.2em;
 }
@@ -13,29 +13,29 @@
     & .spot {
         float: left;
         margin: 8px;
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         background: rgba(0, 0, 0, 0.2);
         border-radius: 100%;
     }
 
     & .spot:first-child {
-        @include animation(zoom, 0, 1.2s, linear, infinite);
+        @include animation(bounced, -1s, 1.7s, ease-in-out, infinite);
     }
 
     & .spot:nth-child(2) {
-        @include animation(zoom, 0.6s, 1.2s, linear, infinite);
+        @include animation(bounced, -0.8s, 1.7s, ease-in-out, infinite);
     }
 
     & .spot:nth-child(3) {
-        @include animation(zoom, 0, 1.2s, linear, infinite);
+        @include animation(bounced, -0.6s, 1.7s, ease-in-out, infinite);
     }
 
     & .spot:nth-child(4) {
-        @include animation(zoom, 0.6s, 1.2s, linear, infinite);
+        @include animation(bounced, -0.4s, 1.7s, ease-in-out, infinite);
     }
 
     & .spot:last-child {
-        @include animation(zoom, 0, 1.2s, linear, infinite);
+        @include animation(bounced, -0.2s, 1.7s, ease-in-out, infinite);
     }
 }
