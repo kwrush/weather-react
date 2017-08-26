@@ -1,5 +1,5 @@
 ## Weather React
-Weather React is a simple weather app using [React](https://facebook.github.io/react/) and [Redux](http://redux.js.org/). 
+I build this simple weather app in order to learn [React](https://facebook.github.io/react/) and [Redux](http://redux.js.org/). 
 >This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ### Screenshot
