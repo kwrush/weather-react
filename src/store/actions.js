@@ -51,7 +51,7 @@ export const requestSearchFail = error => {
     };
 }
 
-const fetchWeather = id => {
+export const fetchWeather = id => {
     return (dispatch, getState) => {
         const cityEntity = getState().getIn(['cities', id]);
 
@@ -70,7 +70,7 @@ const fetchWeather = id => {
             return getWeather(geoCoordinates)
                 .then(data => {
                     const formattedData = cityEntity.merge(formatWeatherData(data));
-                    return dispatch(requestWeatherSuccess(formattedData));
+                    dispatch(requestWeatherSuccess(formattedData));
                 }) 
                 .catch(error => dispatch(requestWeatherFail({
                     id: id, 
@@ -88,7 +88,7 @@ export const selectToAddCity = cityInfo => {
     };
 }
 
-const performSearch = (query) => {
+export const performSearch = (query) => {
     return (dispatch, getState) => {
         dispatch(requestSearch(query));
         return getGeoSuggestion(
@@ -96,7 +96,7 @@ const performSearch = (query) => {
         )
         .then(results => {
             const formattedResults = formatGeoSuggestion(results);
-            return dispatch(requestSearchSuccess(formattedResults));
+            dispatch(requestSearchSuccess(formattedResults));
         })
         .catch(error => dispatch(requestSearchFail(error)));
     }
@@ -127,9 +127,9 @@ export function fetchWeatherIfNeeded (id) {
             if (typeof updatedAt === 'number') {
                 const currentTime = Date.now() / 1000;
                 if (shouldUpdateWeather(updatedAt, currentTime)) 
-                   return dispatch(fetchWeather(id));
+                   dispatch(fetchWeather(id));
             } else {
-                return dispatch(fetchWeather(id));
+                dispatch(fetchWeather(id));
             }
         } 
     };
@@ -146,7 +146,7 @@ export const addCity = index => {
             dispatch(selectToAddCity(result));
             dispatch(clearSearchResults())
         }
-        return dispatch(fetchWeatherIfNeeded(id));
+        dispatch(fetchWeatherIfNeeded(id));
     }
 }
 
